@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.6.RELEASE</version>
+        <!--<version>1.5.14.RELEASE</version>-->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.yunus</groupId>
+    <artifactId>spring-boot-leaning</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <guava.version>27.0.1-jre</guava.version>
+        <fastjson.version>1.2.54</fastjson.version>
+        <hutool.version>4.1.2</hutool.version>
+    </properties>
+
+    <modules>
+        <module>spring-boot-cache</module>
+        <module>spring-boot-web</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

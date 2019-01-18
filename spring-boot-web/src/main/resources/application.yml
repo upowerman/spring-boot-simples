@@ -1,0 +1,13 @@
+# 服务配置
+server:
+    context-path: /sell
+    port: 8080
+
+    # 配置redis
+spring:
+    redis:
+        host: 127.0.0.1
+        port: 6379
+        sysName: ace-admin
+        enable: true
+        database: 0
