@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author lanxum
  */
 @SpringBootApplication
-public class Application {
+public class SpringWebBootStrap {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(SpringWebBootStrap.class, args);
     }
 }

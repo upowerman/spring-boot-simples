@@ -3,6 +3,8 @@ package com.yunus.service.impl;
 import com.google.common.base.Preconditions;
 import com.yunus.entity.Person;
 import com.yunus.service.PersonService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.*;
  * @date: 2019/1/18
  */
 @Service
+@Slf4j
 public class PersonServiceImpl implements PersonService {
 
     private Map<Integer, Person> persons = new HashMap<>();
@@ -35,12 +38,14 @@ public class PersonServiceImpl implements PersonService {
     @Override
     @Cacheable(value = "persons", key = "#id")
     public Person getById(Integer id) {
+        log.info("进入方法内");
         return persons.get(id);
     }
 
     @Override
     @Cacheable(value = "persons")
     public List<Person> list() {
+        log.info("进入方法内");
         List<Person> list = new ArrayList<>();
         Set<Map.Entry<Integer, Person>> entries = persons.entrySet();
         for (Map.Entry<Integer, Person> entry : entries) {
@@ -51,8 +56,9 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    @CachePut(value = "persons", key = "#form.id")
+    @CacheEvict(value = "persons", key = "#form.id")
     public Person updateById(Person form) {
+        log.info("进入方法内");
         Preconditions.checkNotNull(form.getId());
         persons.put(form.getId(), form);
         return form;
