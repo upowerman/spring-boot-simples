@@ -31,7 +31,7 @@ public class PersonServiceImpl implements PersonService {
             person.setAge(String.valueOf(random.nextInt()));
             person.setId(i + 1);
             person.setName(names[i % 5] + i);
-            persons.put(i, person);
+            persons.put(i+1, person);
         }
     }
 
@@ -39,7 +39,8 @@ public class PersonServiceImpl implements PersonService {
     @Cacheable(value = "persons", key = "#id")
     public Person getById(Integer id) {
         log.info("进入方法内");
-        return persons.get(id);
+        Person person = persons.get(id);
+        return person;
     }
 
     @Override
