@@ -1,27 +1,14 @@
 package com.yunus.controller;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.json.JSONUtil;
-import com.yunus.annotation.Login;
-import com.yunus.component.MultipartFileAdapter;
-import com.yunus.constant.Gender;
-import com.yunus.entity.User;
 import com.yunus.lock.RedisLock;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
+/**
+ * @author lanxum
+ */
 @RestController()
 @CrossOrigin("*")
 public class RedisLockController {
@@ -52,10 +39,9 @@ public class RedisLockController {
      */
 
     @GetMapping("/unlock/{id}")
-    public String nolock(@PathVariable("id") String id) throws InterruptedException {
+    public String nolock(@PathVariable("id") String id) {
         // 模拟业务处理
         if (total > 0) {
-            //Thread.sleep(1000);
             total--;
             System.out.println("还剩：" + total + "件");
         }

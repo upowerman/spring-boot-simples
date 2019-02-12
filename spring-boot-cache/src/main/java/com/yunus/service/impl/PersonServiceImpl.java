@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.crypto.KeyGenerator;
 import java.util.*;
 
 /**
@@ -31,7 +32,7 @@ public class PersonServiceImpl implements PersonService {
             person.setAge(String.valueOf(random.nextInt()));
             person.setId(i + 1);
             person.setName(names[i % 5] + i);
-            persons.put(i+1, person);
+            persons.put(i + 1, person);
         }
     }
 
