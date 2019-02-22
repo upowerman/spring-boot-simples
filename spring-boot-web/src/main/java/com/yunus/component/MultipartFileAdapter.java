@@ -1,6 +1,5 @@
 package com.yunus.component;
 
-import com.sun.istack.internal.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,18 +14,29 @@ import java.io.InputStream;
  * @date: 2018/11/21
  */
 public class MultipartFileAdapter implements MultipartFile {
+
     private final String name;
     private String originalFilename;
-    @Nullable
     private String contentType;
     private final byte[] content;
 
 
+    /**
+     * @param name          name of the parameter in the multipart form.（name 即为：controller MultipartFile参数名）
+     * @param contentStream 输入流
+     * @throws IOException
+     */
     public MultipartFileAdapter(String name, InputStream contentStream) throws IOException {
         this(name, "", (String) null, (byte[]) FileCopyUtils.copyToByteArray(contentStream));
     }
 
-    public MultipartFileAdapter(String name, @Nullable String originalFilename, @Nullable String contentType, @Nullable byte[] content) {
+    /**
+     * @param name             multipart form parameter 参数名
+     * @param originalFilename 原文件名
+     * @param contentType      file 的contentT-Type
+     * @param content          二进制文件
+     */
+    public MultipartFileAdapter(String name, String originalFilename, String contentType, byte[] content) {
         Assert.hasLength(name, "Name must not be null");
         this.name = name;
         this.originalFilename = originalFilename != null ? originalFilename : "";
@@ -45,7 +55,6 @@ public class MultipartFileAdapter implements MultipartFile {
     }
 
     @Override
-    @Nullable
     public String getContentType() {
         return this.contentType;
     }

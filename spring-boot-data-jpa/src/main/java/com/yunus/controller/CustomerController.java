@@ -4,7 +4,6 @@ import com.yunus.dao.CustomerRepository;
 import com.yunus.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.text.normalizer.CharTrie;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
