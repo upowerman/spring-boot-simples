@@ -1,0 +1,39 @@
+server:
+    port: 8080
+
+spring:
+    application:
+        name: spring-boot-mq
+    rabbitmq:
+        addresses: 127.0.0.1
+        port: 5672
+        username: guest
+        password: guest
+        virtual-host: test
+        connection-timeout: 5000
+        # 生产者端的重试
+        template:
+            retry:
+                enabled: true
+        #开启发送消息到exchange但是exchange没有和队列绑定的确认机制
+        publisher-returns: true
+        #开启发送消息到exchange确认机制
+        publisher-confirms: true
+        #rabbitmq listetner
+        # 消费者最小数量
+        listener:
+            simple:
+                concurrency: 10
+                #消费者最大数
+                max-concurrency: 20
+                # 消息的确认模式
+                acknowledge-mode: manual
+                # 每一次发送到消费者的消息数量，它应该大于或等于事务大小（如果使用）。
+                prefetch: 10
+                # 消费者端的重试
+                retry:
+                    enabled: true
+
+mq:
+    retry:
+        count: 3
