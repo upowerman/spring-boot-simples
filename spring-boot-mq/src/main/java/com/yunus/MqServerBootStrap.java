@@ -13,6 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MqServerBootStrap {
 
     public static void main(String[] args) {
-        SpringApplication.run(MqServerBootStrap.class);
+        SpringApplication.run(MqServerBootStrap.class, args);
     }
 }

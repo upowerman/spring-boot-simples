@@ -20,13 +20,14 @@ import java.util.Map;
  * @date: 2019/3/1
  */
 @Configuration
-@ConditionalOnBean(RabbitTemplate.class)
 public class RabbitConfig {
+
     /**
      * 方法rabbitAdmin的功能描述:动态声明queue、exchange、routing
      *
-     * @param connectionFactory 连接工程
+     * @param connectionFactory
      * @return
+     * @author : yuhao.wang
      */
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
@@ -38,13 +39,16 @@ public class RabbitConfig {
         rabbitAdmin.declareQueue(deadQueue);
         rabbitAdmin.declareExchange(deadExchange);
         rabbitAdmin.declareBinding(BindingBuilder.bind(deadQueue).to(deadExchange));
+
         // 发放奖励队列交换机
         DirectExchange exchange = new DirectExchange(RabbitConstants.MQ_EXCHANGE_SEND_AWARD);
+
         //声明发送优惠券的消息队列（Direct类型的exchange）
         Queue couponQueue = queue(RabbitConstants.QUEUE_NAME_SEND_COUPON);
         rabbitAdmin.declareQueue(couponQueue);
         rabbitAdmin.declareExchange(exchange);
         rabbitAdmin.declareBinding(BindingBuilder.bind(couponQueue).to(exchange).with(RabbitConstants.MQ_ROUTING_KEY_SEND_COUPON));
+
         return rabbitAdmin;
     }
 
