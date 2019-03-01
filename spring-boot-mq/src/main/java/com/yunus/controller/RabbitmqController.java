@@ -25,7 +25,7 @@ public class RabbitmqController {
         sendMessage.setId(1);
         sendMessage.setAge(20);
         sendMessage.setName(name);
-        rabbitSender.sendMessage(RabbitConstants.MQ_EXCHANGE_SEND_AWARD, RabbitConstants.MQ_ROUTING_KEY_SEND_COUPON, sendMessage);
+        rabbitSender.sendMessage(RabbitConstants.MQ_EXCHANGE_DEAD_QUEUE, RabbitConstants.MQ_ROUTING_KEY_DEAD_QUEUE, sendMessage);
         return "发送成";
     }
 
