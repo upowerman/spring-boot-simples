@@ -7,9 +7,9 @@ spring:
     rabbitmq:
         addresses: 127.0.0.1
         port: 5672
-        username: guest
-        password: guest
-        virtual-host: test
+        username: gwself
+        password: 123456
+#        virtual-host: test
         connection-timeout: 5000
         # 生产者端的重试
         template:
