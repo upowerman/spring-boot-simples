@@ -1,11 +1,13 @@
 package com.yunus.config;
 
+import com.yunus.config.auth.CustomAuthenticationSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * @Author: gaoyunfeng
@@ -13,6 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomAuthenticationSuccessHandler();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -22,6 +29,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/statics/login.html")
                 // 处理表单登录 URL
                 .loginProcessingUrl("/login")
+                // 处理登录成功
+                .successHandler(authenticationSuccessHandler())
                 .and()
                 // 授权配置
                 .authorizeRequests()
