@@ -29,6 +29,7 @@
         <module>spring-boot-docker</module>
         <module>spring-boot-websocket</module>
         <module>spring-boot-security</module>
+        <module>spring-boot-transaction</module>
     </modules>
 
     <dependencyManagement>
