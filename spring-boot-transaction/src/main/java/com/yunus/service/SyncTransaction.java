@@ -24,6 +24,7 @@ public class SyncTransaction {
      * <p>
      * transactional 是 aop 实现的   1. 开启事务   2. method.invoke(target,args); 3. 提交或者回滚事务
      * 在代理了执行完1 2 步骤后 当前线程还没有提交   其他线程 读取 时  就不会读到为提交的数据 因为 mysql 默认隔离级别为 可重复读
+     * 解决办法  --- 在其他方法包装  后 使用
      *
      * @param id
      */
