@@ -19,6 +19,7 @@
         <guava.version>27.0.1-jre</guava.version>
         <fastjson.version>1.2.54</fastjson.version>
         <hutool.version>4.1.2</hutool.version>
+        <spring-social-config.versino>1.1.6.RELEASE</spring-social-config.versino>
     </properties>
 
     <modules>
@@ -48,6 +49,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.social</groupId>
+                <artifactId>spring-social-config</artifactId>
+                <version>${spring-social-config.versino}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
