@@ -17,12 +17,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void test1(Long id) {
-        userService1.methodC(id);
+        userService1.methodA(id);
+        userService1.methodB(id);
     }
 
     @Override
     public void test2(Long id) {
-        userService1.methodA(id);
+        userService1.methodC(id);
     }
 
     @Override

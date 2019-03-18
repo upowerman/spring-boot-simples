@@ -23,13 +23,10 @@ public class UserService1Impl implements UserService1 {
         User user = userMapper.selectById(id);
         user.setAge(11);
         userMapper.updateById(user);
-        methodB(id);
-        user.setAge(12);
-        userMapper.updateById(user);
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = RuntimeException.class)
     public void methodB(Long id) {
         User one = userMapper.selectById(id);
         one.setAge(19);
@@ -42,6 +39,9 @@ public class UserService1Impl implements UserService1 {
     public void methodC(Long id) {
         User user = userMapper.selectById(id);
         user.setAge(11);
+        userMapper.updateById(user);
+        methodB(id);
+        user.setAge(222);
         userMapper.updateById(user);
     }
 }

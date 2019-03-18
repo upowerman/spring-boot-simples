@@ -26,6 +26,21 @@ public class TransactionController {
 
     @GetMapping("/test1")
     public void test1(@RequestParam("id") Long id) {
+        userService.test1(id);
+    }
+
+    @GetMapping("/test2")
+    public void test2(@RequestParam("id") Long id) {
+        userService.test2(id);
+    }
+
+    @GetMapping("/test3")
+    public void test3(@RequestParam("id") Long id) {
         userService.test3(id);
+    }
+
+    @GetMapping("/test4")
+    public void test4(@RequestParam("id") Long id) {
+        userService1.methodC(id);
     }
 }
