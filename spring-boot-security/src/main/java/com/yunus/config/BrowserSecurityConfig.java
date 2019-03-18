@@ -8,11 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 /**
  * @Author: gaoyunfeng
@@ -24,6 +29,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ValidateCodeFilter validateCodeFilter;
+    @Autowired
+    private DataSource dataSource;
+    @Autowired
+    private UserDetailsService userDetailService;
 
 
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
@@ -49,7 +58,15 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 处理登录失败
                 .failureHandler(authenticationFailureHandler())
                 .and()
+                .rememberMe()
+                // 配置 token 持久化仓库
+                .tokenRepository(persistentTokenRepository())
+                // remember 过期时间，单为秒
+                .tokenValiditySeconds(3600)
+                // 处理自动登录逻辑
+                .userDetailsService(userDetailService)
                 // 授权配置
+                .and()
                 .authorizeRequests()
                 // 登录跳转 URL 无需认证
                 .antMatchers("/statics/**", "/code/image").permitAll()
@@ -63,5 +80,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+        jdbcTokenRepository.setCreateTableOnStartup(false);
+        return jdbcTokenRepository;
     }
 }
