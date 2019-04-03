@@ -11,7 +11,6 @@ import javax.websocket.server.ServerEndpoint;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
- * 此种 websocket 不能解决 分布式下的问题
  *
  * @Author: gaoyunfeng
  * @date: 2019/3/13
