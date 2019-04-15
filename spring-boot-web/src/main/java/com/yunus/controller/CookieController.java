@@ -1,10 +1,10 @@
 package com.yunus.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping
 public class CookieController {
 
-    public void cookieTest(HttpServletRequest request, HttpServletResponse response) {
+
+    @GetMapping("/cookie")
+    public void cookieTest(HttpServletResponse response) {
         Cookie cookie = new Cookie("jwt", "salt");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(-1);
