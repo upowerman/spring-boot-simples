@@ -29,7 +29,7 @@ public class SocketController {
     }
 
     /**
-     * 定时推送消息
+     * 定时推送消息ø
      */
     @Scheduled(fixedRate = 1000)
     public void callback() {
