@@ -35,6 +35,7 @@
         <module>spring-boot-transaction</module>
         <module>spring-bean-lifecycle</module>
         <module>spring-boot-quartz</module>
+        <module>spring-boot-scheduled</module>
     </modules>
 
     <dependencyManagement>
