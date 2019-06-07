@@ -22,6 +22,7 @@
         <fastjson.version>1.2.54</fastjson.version>
         <hutool.version>4.1.2</hutool.version>
         <druid.version>1.1.5</druid.version>
+        <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
         <quartz.version>2.3.0</quartz.version>
     </properties>
 
@@ -36,6 +37,7 @@
         <module>spring-boot-transaction</module>
         <module>spring-bean-lifecycle</module>
         <module>spring-boot-quartz</module>
+        <module>spring-boot2-quartz</module>
         <module>spring-boot-scheduled</module>
     </modules>
 
@@ -76,6 +78,12 @@
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring-contect-support.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
