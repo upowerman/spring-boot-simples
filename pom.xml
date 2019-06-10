@@ -41,6 +41,7 @@
         <module>spring-boot2-quartz</module>
         <module>spring-boot-scheduled</module>
         <module>spring-boot-es</module>
+        <module>spring-boot-webflux</module>
     </modules>
 
     <dependencyManagement>
