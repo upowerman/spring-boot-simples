@@ -8,3 +8,8 @@
 3. 安装logstash
 
 docker run --rm -it -p 4560:4560 --name logstash --link es -d -v /Users/gaoyunfeng/Applications/docker/logstash/config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf logstash:6.5.4
+
+
+
+
+备注：docker 相关查看https://www.elastic.co/guide/en/logstash/current/docker-config.html
