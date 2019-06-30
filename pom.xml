@@ -46,6 +46,7 @@
         <module>spring-boot-elk</module>
         <module>spring-boot-starter-demo</module>
         <module>spring-boot-starter-client</module>
+        <module>spring-boot-mongo</module>
     </modules>
 
     <dependencyManagement>
