@@ -3,6 +3,8 @@ package com.yunus.service;
 import com.yunus.domain.User;
 import com.yunus.repository.UserMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +12,8 @@ import java.util.List;
 @Service
 public class UserService {
 
-
+    @Autowired
+    private MongoTemplate mongoTemplate;
     @Autowired
     private UserMongoRepository userMongoRepository;
 
@@ -28,7 +31,12 @@ public class UserService {
      * @param user
      */
     public void update(User user) {
-        userMongoRepository.deleteById(user.getId());
+        Query query = new Query(Criteria.where("id").is(user.getId()));
+        Update update = new Update().set("address",user.getAddress());
+        mongoTemplate.updateFirst(query, update, user.getClass());
+    }
+
+    public void update2(User user){
         userMongoRepository.save(user);
     }
 
