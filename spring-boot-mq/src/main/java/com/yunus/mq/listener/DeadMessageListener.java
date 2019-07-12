@@ -7,7 +7,6 @@ import com.yunus.mq.message.SendMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -21,7 +20,7 @@ public class DeadMessageListener {
 
     private final Logger logger = LoggerFactory.getLogger(DeadMessageListener.class);
 
-    @RabbitListener(queues = RabbitConstants.QUEUE_NAME_DEAD_QUEUE)
+    //@RabbitListener(queues = RabbitConstants.QUEUE_NAME_DEAD_QUEUE)
     public void process(SendMessage sendMessage, Channel channel, Message message) throws Exception {
         logger.info("[{}]处理延迟队列消息队列接收数据，消息体：{}", RabbitConstants.QUEUE_NAME_DEAD_QUEUE, JSON.toJSONString(sendMessage));
 

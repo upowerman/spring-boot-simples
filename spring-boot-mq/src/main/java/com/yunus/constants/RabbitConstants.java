@@ -36,4 +36,20 @@ public final class RabbitConstants {
      */
     public static final String MQ_ROUTING_KEY_SEND_COUPON = "test-routing-key-send-coupon";
 
+
+    /**
+     * test topic 名称
+     */
+    public static final String TOPIC_EXCHANGE_TEST = "my-topic-test";
+
+    /**
+     * test topic queue 名称
+     */
+    public static final String TOPIC_QUEQUE_TEST="my-topic-queue-test";
+
+    /**
+     * test topic 路由key
+     */
+    public static final String TOPIC_ROUTING_KEY="topic.queue.#";
+
 }

@@ -1,14 +1,9 @@
 package com.yunus.config;
 
 import com.yunus.constants.RabbitConstants;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -48,6 +43,15 @@ public class RabbitConfig {
         rabbitAdmin.declareQueue(couponQueue);
         rabbitAdmin.declareExchange(exchange);
         rabbitAdmin.declareBinding(BindingBuilder.bind(couponQueue).to(exchange).with(RabbitConstants.MQ_ROUTING_KEY_SEND_COUPON));
+
+
+        // topic 模式
+        TopicExchange topicExchange = new TopicExchange(RabbitConstants.TOPIC_EXCHANGE_TEST);
+        // 队列
+        Queue topicQueue = new Queue(RabbitConstants.TOPIC_QUEQUE_TEST,true,false,true);
+        rabbitAdmin.declareQueue(topicQueue);
+        rabbitAdmin.declareExchange(topicExchange);
+        rabbitAdmin.declareBinding(BindingBuilder.bind(topicQueue).to(topicExchange).with(RabbitConstants.TOPIC_ROUTING_KEY));
 
         return rabbitAdmin;
     }
