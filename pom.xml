@@ -48,6 +48,7 @@
         <module>spring-boot-starter-client</module>
         <module>spring-boot-mongo</module>
         <module>spring-boot-mq-kafka</module>
+        <module>spring-boot-mail</module>
     </modules>
 
     <dependencyManagement>
