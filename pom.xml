@@ -26,6 +26,8 @@
         <quartz.version>2.3.0</quartz.version>
         <fastjson.version>1.2.54</fastjson.version>
         <logstash-logback.version>5.3</logstash-logback.version>
+        <activiti.version>6.0.0</activiti.version>
+        <h2.version>1.4.197</h2.version>
     </properties>
 
     <modules>
@@ -118,6 +120,16 @@
                 <version>0.2.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.activiti</groupId>
+                <artifactId>activiti-engine</artifactId>
+                <version>${activiti.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
