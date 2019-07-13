@@ -1,0 +1,10 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: alibaba-sentinel-rate-limiting
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
