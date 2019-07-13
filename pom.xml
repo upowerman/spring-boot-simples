@@ -51,8 +51,8 @@
         <module>spring-boot-mongo</module>
         <module>spring-boot-mq-kafka</module>
         <module>spring-boot-mail</module>
-        <module>spring-boot-activiti</module>
         <module>spring-boot-sentinel</module>
+        <module>spring-boot-activiti-simples</module>
     </modules>
 
     <dependencyManagement>
