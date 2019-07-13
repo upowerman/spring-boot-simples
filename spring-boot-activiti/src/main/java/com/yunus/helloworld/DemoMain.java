@@ -37,6 +37,11 @@ public class DemoMain {
 
         // 处理流程任务
 
+        processTask(engine, processInstance);
+
+    }
+
+    private static void processTask(ProcessEngine engine, ProcessInstance processInstance) throws ParseException {
         Scanner scanner = new Scanner(System.in);
 
         while (processInstance != null && !processInstance.isEnded()) {
@@ -67,10 +72,13 @@ public class DemoMain {
                 }
                 taskService.complete(list.get(i).getId(), variables);
                 processInstance = engine.getRuntimeService()
-                        .createProcessInstanceQuery().processInstanceId(processInstance.getId()).singleResult();
+                        .createProcessInstanceQuery()
+                        .processInstanceId(processInstance.getId())
+                        .singleResult();
             }
         }
 
+        scanner.close();
     }
 
     private static ProcessInstance runProcess(ProcessEngine engine, ProcessDefinition processDefinition) {
@@ -83,7 +91,7 @@ public class DemoMain {
     private static ProcessDefinition deployProcessDefinition(ProcessEngine engine) {
         RepositoryService repositoryService = engine.getRepositoryService();
         DeploymentBuilder deploymentBuilder = repositoryService.createDeployment();
-        deploymentBuilder.addClasspathResource("process/leave.bpmn20.xml");
+        deploymentBuilder.addClasspathResource("process/leave.bpmn");
         Deployment deploy = deploymentBuilder.deploy();
         String deployId = deploy.getId();
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()

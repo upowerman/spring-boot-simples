@@ -3,7 +3,7 @@
 
     <property name="log.dir" value="target/logs/"/>
     <property name="encoding" value="UTF-8"></property>
-    <property name="plain" value="%msg%n"/>
+    <property name="plain" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
     <!--    控制台输出-->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -12,7 +12,7 @@
         </encoder>
     </appender>
 
-    <logger name="root" level="ERROR"/>
+    <logger name="root" level="INFO"/>
     <logger name="com.yunus" level="DEBUG"></logger>
     <root>
         <appender-ref ref="stdout"/>
