@@ -6,7 +6,6 @@ import com.yunus.po.*;
 import com.yunus.service.LeaveService;
 import com.yunus.service.SystemService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
@@ -53,17 +52,27 @@ public class ActivitiController {
     @Autowired
     SystemService systemservice;
 
+    /**
+     * 跳转
+     *
+     * @return
+     */
     @RequestMapping(value = "/processlist", method = RequestMethod.GET)
     String process() {
         return "activiti/processlist";
     }
 
+    /**
+     * 部署流程定义文件
+     *
+     * @param uploadFile 流程定义文件
+     * @return
+     */
     @RequestMapping(value = "/uploadworkflow", method = RequestMethod.POST)
-    public String fileupload(@RequestParam MultipartFile uploadfile, HttpServletRequest request) {
+    public String fileupload(@RequestParam MultipartFile uploadFile) {
         try {
-            MultipartFile file = uploadfile;
-            String filename = file.getOriginalFilename();
-            InputStream is = file.getInputStream();
+            String filename = uploadFile.getOriginalFilename();
+            InputStream is = uploadFile.getInputStream();
             rep.createDeployment().addInputStream(filename, is).deploy();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,31 +80,41 @@ public class ActivitiController {
         return "index";
     }
 
+    /**
+     * 获取流程定义列表
+     *
+     * @param current  当前页码
+     * @param rowCount 一页多少条
+     * @return
+     */
     @RequestMapping(value = "/getprocesslists", method = RequestMethod.POST)
     @ResponseBody
-    public DataGrid<Process> getlist(@RequestParam("current") int current, @RequestParam("rowCount") int rowCount) {
-        int firstrow = (current - 1) * rowCount;
-        List<ProcessDefinition> list = rep.createProcessDefinitionQuery().listPage(firstrow, rowCount);
+    public DataGrid<Process> getList(@RequestParam("current") int current, @RequestParam("rowCount") int rowCount) {
+        int firstRow = (current - 1) * rowCount;
+        List<ProcessDefinition> processDefinitions = rep.createProcessDefinitionQuery().listPage(firstRow, rowCount);
         int total = rep.createProcessDefinitionQuery().list().size();
-        List<Process> mylist = new ArrayList<Process>();
-        for (int i = 0; i < list.size(); i++) {
-            Process p = new Process();
-            p.setDeploymentId(list.get(i).getDeploymentId());
-            p.setId(list.get(i).getId());
-            p.setKey(list.get(i).getKey());
-            p.setName(list.get(i).getName());
-            p.setResourceName(list.get(i).getResourceName());
-            p.setDiagramresourcename(list.get(i).getDiagramResourceName());
-            mylist.add(p);
+        List<Process> processes = new ArrayList<Process>();
+        for (ProcessDefinition processDefinition : processDefinitions) {
+            Process p = Process.builder(processDefinition);
+            processes.add(p);
         }
         DataGrid<Process> grid = new DataGrid<Process>();
         grid.setCurrent(current);
         grid.setRowCount(rowCount);
-        grid.setRows(mylist);
+        grid.setRows(processes);
         grid.setTotal(total);
         return grid;
     }
 
+
+    /**
+     * 获取流程定义xml 文件
+     *
+     * @param pdid     流程定义id
+     * @param resource 资源路径
+     * @param response
+     * @throws Exception
+     */
     @RequestMapping(value = "/showresource", method = RequestMethod.GET)
     public void export(@RequestParam("pdid") String pdid, @RequestParam("resource") String resource,
                        HttpServletResponse response) throws Exception {
@@ -105,6 +124,14 @@ public class ActivitiController {
         IOUtils.copy(is, output);
     }
 
+
+    /**
+     * 删除流程定义
+     *
+     * @param deployid 部署id
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/deletedeploy", method = RequestMethod.POST)
     public String deletedeploy(@RequestParam("deployid") String deployid) throws Exception {
         rep.deleteDeployment(deployid, true);
@@ -146,6 +173,13 @@ public class ActivitiController {
         return "activiti/modifyapply";
     }
 
+    /**
+     * 开始请假
+     *
+     * @param apply   请假表单
+     * @param session session
+     * @return
+     */
     @RequestMapping(value = "/startleave", method = RequestMethod.POST)
     @ResponseBody
     public MSG start_leave(LeaveApply apply, HttpSession session) {
@@ -157,9 +191,15 @@ public class ActivitiController {
         return new MSG("sucess");
     }
 
-    @ApiOperation("获取部门领导审批代办列表")
-    @RequestMapping(value = "/depttasklist", produces = {
-            "application/json;charset=UTF-8"}, method = RequestMethod.POST)
+    /**
+     * 部门领导 请假任务列表
+     *
+     * @param session
+     * @param current
+     * @param rowCount
+     * @return
+     */
+    @RequestMapping(value = "/depttasklist", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
     public DataGrid<LeaveTask> getdepttasklist(HttpSession session, @RequestParam("current") int current,
                                                @RequestParam("rowCount") int rowCount) {

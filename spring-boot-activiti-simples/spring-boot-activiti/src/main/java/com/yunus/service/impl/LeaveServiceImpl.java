@@ -36,10 +36,11 @@ public class LeaveServiceImpl implements LeaveService {
         apply.setApply_time(new Date().toString());
         apply.setUser_id(userid);
         leavemapper.save(apply);
-        String businesskey = String.valueOf(apply.getId());//使用leaveapply表的主键作为businesskey,连接业务数据和流程数据
+        //使用leaveapply表的主键作为businesskey,连接业务数据和流程数据
+        String businessKey = String.valueOf(apply.getId());
         identityservice.setAuthenticatedUserId(userid);
-        ProcessInstance instance = runtimeservice.startProcessInstanceByKey("leave", businesskey, variables);
-        System.out.println(businesskey);
+        ProcessInstance instance = runtimeservice.startProcessInstanceByKey("leave", businessKey, variables);
+        System.out.println(businessKey);
         String instanceid = instance.getId();
         apply.setProcess_instance_id(instanceid);
         leavemapper.updateByPrimaryKey(apply);
