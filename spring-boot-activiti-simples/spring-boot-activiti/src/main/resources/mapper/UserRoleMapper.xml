@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="boot.spring.mapper.UserRoleMapper">
-  <resultMap id="BaseResultMap" type="boot.spring.po.UserRole">
+<mapper namespace="com.yunus.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.yunus.po.UserRole">
     <id column="urid" jdbcType="INTEGER" property="urid" />
     <result column="userid" jdbcType="INTEGER" property="userid" />
     <result column="roleid" jdbcType="INTEGER" property="roleid" />
@@ -24,14 +24,14 @@
     delete from user_role
     where urid = #{urid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="boot.spring.po.UserRole">
+  <insert id="insert" parameterType="com.yunus.po.UserRole">
     insert into user_role (urid, userid, roleid
       )
     values (#{urid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}
       )
   </insert>
   
-  <update id="updateByPrimaryKeySelective" parameterType="boot.spring.po.UserRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.yunus.po.UserRole">
     update user_role
     <set>
       <if test="userid != null">
