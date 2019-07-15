@@ -1,18 +1,10 @@
 package com.yunus.pagemodel;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@AllArgsConstructor
+@Data
 public class MSG {
 	String state;
-	
-	public MSG(String state) {
-		this.state = state;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-	
 }

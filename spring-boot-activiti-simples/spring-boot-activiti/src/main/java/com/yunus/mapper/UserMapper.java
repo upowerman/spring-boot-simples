@@ -1,6 +1,7 @@
 package com.yunus.mapper;
 
-import boot.spring.po.User;
+
+import com.yunus.po.User;
 
 import java.util.List;
 

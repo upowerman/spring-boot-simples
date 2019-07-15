@@ -78,6 +78,11 @@
             <artifactId>activiti-spring-boot-starter-basic</artifactId>
             <version>5.22.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+        </dependency>
     </dependencies>
 
     <build>

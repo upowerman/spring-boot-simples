@@ -1,8 +1,8 @@
 package com.yunus.service.impl;
 
-import boot.spring.mapper.PurchaseApplyMapper;
-import boot.spring.po.PurchaseApply;
-import boot.spring.service.PurchaseService;
+import com.yunus.mapper.PurchaseApplyMapper;
+import com.yunus.po.PurchaseApply;
+import com.yunus.service.PurchaseService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;

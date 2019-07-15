@@ -1,26 +1,12 @@
 package com.yunus.po;
 
+import lombok.Data;
+
+@Data
 public class Role_permission {
-	int rpid;
-	Role role;
-	Permission permission;
-	public int getRpid() {
-		return rpid;
-	}
-	public void setRpid(int rpid) {
-		this.rpid = rpid;
-	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	public Permission getPermission() {
-		return permission;
-	}
-	public void setPermission(Permission permission) {
-		this.permission = permission;
-	}
+	private int rpid;
+	private Role role;
+	private Permission permission;
+
 	
 }

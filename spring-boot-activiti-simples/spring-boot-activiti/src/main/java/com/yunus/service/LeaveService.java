@@ -9,19 +9,30 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public interface LeaveService {
-	public ProcessInstance startWorkflow(LeaveApply apply, String userid, Map<String, Object> variables);
-	public List<LeaveApply> getpagedepttask(String userid, int firstrow, int rowcount);
-	public int getalldepttask(String userid);
-	public LeaveApply getleave(int id);
-	public List<LeaveApply> getpagehrtask(String userid, int firstrow, int rowcount);
-	public int getallhrtask(String userid);
-	public List<LeaveApply> getpageXJtask(String userid, int firstrow, int rowcount);
-	public int getallXJtask(String userid);
-	public List<LeaveApply> getpageupdateapplytask(String userid, int firstrow, int rowcount);
-	public int getallupdateapplytask(String userid);
-	public void completereportback(String taskid, String realstart_time, String realend_time);
-	public void updatecomplete(String taskid, LeaveApply leave, String reappply);
-	public List<String> getHighLightedFlows(ProcessDefinitionEntity deployedProcessDefinition, List<HistoricActivityInstance> historicActivityInstances);
+    ProcessInstance startWorkflow(LeaveApply apply, String userid, Map<String, Object> variables);
+
+    List<LeaveApply> getpagedepttask(String userid, int firstrow, int rowcount);
+
+    int getalldepttask(String userid);
+
+    LeaveApply getleave(int id);
+
+    List<LeaveApply> getpagehrtask(String userid, int firstrow, int rowcount);
+
+    int getallhrtask(String userid);
+
+    List<LeaveApply> getpageXJtask(String userid, int firstrow, int rowcount);
+
+    int getallXJtask(String userid);
+
+    List<LeaveApply> getpageupdateapplytask(String userid, int firstrow, int rowcount);
+
+    int getallupdateapplytask(String userid);
+
+    void completereportback(String taskid, String realstart_time, String realend_time);
+
+    void updatecomplete(String taskid, LeaveApply leave, String reappply);
+
+    List<String> getHighLightedFlows(ProcessDefinitionEntity deployedProcessDefinition, List<HistoricActivityInstance> historicActivityInstances);
 }

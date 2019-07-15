@@ -1,9 +1,9 @@
 package com.yunus.service.impl;
 
 
-import boot.spring.mapper.LoginMapper;
-import boot.spring.po.User;
-import boot.spring.service.LoginService;
+import com.yunus.mapper.LoginMapper;
+import com.yunus.po.User;
+import com.yunus.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;

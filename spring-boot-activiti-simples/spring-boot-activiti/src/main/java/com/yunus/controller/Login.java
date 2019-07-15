@@ -1,7 +1,7 @@
 package com.yunus.controller;
 
-import boot.spring.pagemodel.MSG;
-import boot.spring.service.LoginService;
+import com.yunus.pagemodel.MSG;
+import com.yunus.service.LoginService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

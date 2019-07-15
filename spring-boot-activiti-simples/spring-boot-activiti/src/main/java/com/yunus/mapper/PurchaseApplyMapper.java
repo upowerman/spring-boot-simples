@@ -1,6 +1,7 @@
 package com.yunus.mapper;
 
-import boot.spring.po.PurchaseApply;
+
+import com.yunus.po.PurchaseApply;
 
 public interface PurchaseApplyMapper {
 	void save(PurchaseApply apply);

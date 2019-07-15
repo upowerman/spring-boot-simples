@@ -181,7 +181,7 @@ public class ActivitiController {
             Role r = ur.getRole();
             int roleid = r.getRid();
             Role role = systemservice.getRolebyid(roleid);
-            List<Role_permission> p = role.getRole_permission();
+            List<Role_permission> p = role.getRole_permissions();
             for (int j = 0; j < p.size(); j++) {
                 Role_permission rp = p.get(j);
                 Permission permission = rp.getPermission();
@@ -245,7 +245,7 @@ public class ActivitiController {
             Role r = ur.getRole();
             int roleid = r.getRid();
             Role role = systemservice.getRolebyid(roleid);
-            List<Role_permission> p = role.getRole_permission();
+            List<Role_permission> p = role.getRole_permissions();
             for (int j = 0; j < p.size(); j++) {
                 Role_permission rp = p.get(j);
                 Permission permission = rp.getPermission();

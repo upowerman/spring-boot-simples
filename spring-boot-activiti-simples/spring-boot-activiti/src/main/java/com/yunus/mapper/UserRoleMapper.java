@@ -1,6 +1,7 @@
 package com.yunus.mapper;
 
-import boot.spring.po.UserRole;
+
+import com.yunus.po.UserRole;
 
 import java.util.List;
 
