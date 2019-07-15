@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="processEngineConfiguration"
+          class="org.activiti.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://localhost:3306/activiti?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"/>
+        <property name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUsername" value="root"/>
+        <property name="jdbcPassword" value="123456"/>
+        <!--        <property name="databaseSchemaUpdate" value="create-drop"/>-->
+        <property name="databaseSchemaUpdate" value="true"/>
+        <!--        是否生成历史相关的表-->
+        <property name="dbHistoryUsed" value="true"/>
+        <!--        是否生成身份认证相关的表-->
+        <property name="dbIdentityUsed" value="true"/>
+        <!--        表前缀-->
+        <!--        <property name="databaseTablePrefix" value="t_"/>-->
+    </bean>
+
+</beans>

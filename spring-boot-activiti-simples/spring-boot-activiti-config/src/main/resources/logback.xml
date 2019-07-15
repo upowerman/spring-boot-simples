@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+
+    <property name="log.dir" value="target/logs/"/>
+    <property name="encoding" value="UTF-8"></property>
+    <property name="plain" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+    <!--    控制台输出-->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${plain}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+    </appender>
+
+    <logger name="root" level="INFO"/>
+    <logger name="com.yunus" level="DEBUG"></logger>
+    <root>
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
