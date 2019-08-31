@@ -4,6 +4,7 @@ import com.yunus.dao.UserMapper;
 import com.yunus.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -18,10 +19,12 @@ public class UserService1Impl implements UserService1 {
     private UserMapper userMapper;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class,propagation = Propagation.REQUIRES_NEW)
     public void methodA(Long id) {
         User user = userMapper.selectById(id);
-        user.setAge(11);
+        user.setAge(88);
+        userMapper.updateById(user);
+        user.setAge(99);
         userMapper.updateById(user);
     }
 
@@ -40,7 +43,8 @@ public class UserService1Impl implements UserService1 {
         User user = userMapper.selectById(id);
         user.setAge(11);
         userMapper.updateById(user);
-        methodB(id);
+        methodA(id);
+        int i = 9/0;
         user.setAge(222);
         userMapper.updateById(user);
     }

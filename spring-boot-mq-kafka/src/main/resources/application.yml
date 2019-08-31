@@ -4,3 +4,8 @@ server:
 spring:
   application:
     name: kafka-demo
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: dev
+      auto-offset-reset: latest
