@@ -12,13 +12,13 @@ import java.util.Map;
  * @date: 2019/3/1
  */
 @RestController
-@RequestMapping("/docker")
+@RequestMapping("/hello")
 public class DockerController {
 
     @GetMapping
-    public Map<String, String> hello() {
-        Map<String, String> map = new HashMap<>();
-        map.put("hello", "docker");
+    public Map<String, String> hello(String name) {
+        Map<String, String> map = new HashMap<>(1);
+        map.put("hello", name);
         return map;
     }
 }
