@@ -10,5 +10,11 @@
         ├── spring-boot-elk                         -- test elk 使用
         ├── spring-boot-es                          -- spring-boot-starter-es 使用过程test
         ├── spring-boot-mail                        -- mail demo
-        ├── spring-boot-mongon                      -- 
+        ├── spring-boot-mongon                      -- mongon操作实践
+        ├── spring-boot-mq-kafka                    -- spring kafka 测试
+        ├── spring-boot-mq                          -- spring-boot acitivitmq
+        ├── spring-boot-quartz                      -- quartz test
+        ├── pring-boot-sentinel                     -- spring-boot 阿里限流测试
+        ├── spring-boot-websocket                   -- spring boot websocket 测试
+        ├── spring-boot-webflux                     -- webflux test
         └── spring-boot-starter-demo                -- 自定义springboot starter
