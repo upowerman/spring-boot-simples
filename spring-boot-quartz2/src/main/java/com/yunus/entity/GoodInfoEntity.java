@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+/**
+ * @author gaoyunfeng
+ */
 @Entity
 @Table(name = "basic_good_info")
 @Data

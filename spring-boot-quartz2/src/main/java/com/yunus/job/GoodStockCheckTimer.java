@@ -10,6 +10,7 @@ import java.util.Date;
 
 /**
  * 商品库存检测
+ * @author gaoyunfeng
  */
 public class GoodStockCheckTimer extends QuartzJobBean {
     /**

@@ -9,6 +9,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 /**
  * 定时任务传参数
+ * @author gaoyunfeng
  */
 public class GoodSecKillRemindTimer extends QuartzJobBean {
     /**

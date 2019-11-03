@@ -10,6 +10,7 @@ import java.util.Date;
 
 /**
  * 商品定时任务
+ * @author gaoyunfeng
  */
 public class GoodAddTimer extends QuartzJobBean {
     /**

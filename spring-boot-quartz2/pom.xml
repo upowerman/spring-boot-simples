@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot2-quartz</artifactId>
+    <artifactId>spring-boot-quartz2</artifactId>
 
     <dependencies>
         <!--spring data jpa相关-->

@@ -41,7 +41,7 @@
         <module>spring-boot-transaction</module>
         <module>spring-bean-lifecycle</module>
         <module>spring-boot-quartz</module>
-        <module>spring-boot2-quartz</module>
+        <module>spring-boot-quartz2</module>
         <module>spring-boot-scheduled</module>
         <module>spring-boot-es</module>
         <module>spring-boot-webflux</module>
