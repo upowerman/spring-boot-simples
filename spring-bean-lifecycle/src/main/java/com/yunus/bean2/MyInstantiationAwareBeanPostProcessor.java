@@ -7,6 +7,9 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 
 import java.beans.PropertyDescriptor;
 
+/**
+ * @author gaoyunfeng
+ */
 public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 
     public MyInstantiationAwareBeanPostProcessor() {

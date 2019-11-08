@@ -74,8 +74,7 @@ public class Person implements BeanFactoryAware, BeanNameAware,
      */
     @Override
     public void setBeanFactory(BeanFactory arg0) throws BeansException {
-        System.out
-                .println("【BeanFactoryAware接口】调用BeanFactoryAware.setBeanFactory()");
+        System.out.println("【BeanFactoryAware接口】调用BeanFactoryAware.setBeanFactory()");
         this.beanFactory = arg0;
     }
 
@@ -97,8 +96,7 @@ public class Person implements BeanFactoryAware, BeanNameAware,
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out
-                .println("【InitializingBean接口】调用InitializingBean.afterPropertiesSet()");
+        System.out.println("【InitializingBean接口】调用InitializingBean.afterPropertiesSet()");
     }
 
     /**
@@ -121,7 +119,7 @@ public class Person implements BeanFactoryAware, BeanNameAware,
     /**
      * 通过<bean>的destroy-method属性指定的初始化方法
      */
-    public void myDestory() {
+    public void myDestroy() {
         System.out.println("【destroy-method】调用<bean>的destroy-method属性指定的初始化方法");
     }
 }

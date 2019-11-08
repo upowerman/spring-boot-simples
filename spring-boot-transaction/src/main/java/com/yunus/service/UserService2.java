@@ -6,7 +6,7 @@ package com.yunus.service;
  */
 public interface UserService2 {
 
-    void methodA();
+    void methodA(long id);
 
-    void methodB();
+    void methodB(long id);
 }

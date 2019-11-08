@@ -7,16 +7,13 @@
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-    <bean id="beanPostProcessor" class="com.yunus.bean2.MyBeanPostProcessor">
-    </bean>
+    <bean id="beanPostProcessor" class="com.yunus.bean2.MyBeanPostProcessor"/>
 
-    <bean id="instantiationAwareBeanPostProcessor" class="com.yunus.bean2.MyInstantiationAwareBeanPostProcessor">
-    </bean>
+    <bean id="instantiationAwareBeanPostProcessor" class="com.yunus.bean2.MyInstantiationAwareBeanPostProcessor"/>
 
-    <bean id="beanFactoryPostProcessor" class="com.yunus.bean2.MyBeanFactoryPostProcessor">
-    </bean>
+    <bean id="beanFactoryPostProcessor" class="com.yunus.bean2.MyBeanFactoryPostProcessor"/>
 
-    <bean id="person" class="com.yunus.bean2.Person" init-method="myInit" destroy-method="myDestory" scope="singleton">
+    <bean id="person" class="com.yunus.bean2.Person" init-method="myInit" destroy-method="myDestroy" scope="singleton">
         <property name="name" value="张三"/>
         <property name="beanPostProcessor" ref="beanPostProcessor"/>
         <property name="address" value="北京"/>

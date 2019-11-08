@@ -23,7 +23,7 @@ public class SpringLifeCycleProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if ("annotationBean".equals(beanName)) {
-            LOGGER.info("SpringLifeCycleProcessor start beanName={}", beanName);
+            System.out.println("SpringLifeCycleProcessor start beanName=" + beanName);
         }
         return bean;
     }
@@ -39,7 +39,7 @@ public class SpringLifeCycleProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if ("annotationBean".equals(beanName)) {
-            LOGGER.info("SpringLifeCycleProcessor end beanName={}", beanName);
+            System.out.println("SpringLifeCycleProcessor end beanName=" + beanName);
         }
         return bean;
     }

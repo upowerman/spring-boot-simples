@@ -1,5 +1,8 @@
 package com.yunus.service;
 
+import com.yunus.dao.UserMapper;
+import com.yunus.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,15 +14,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService2Impl implements UserService2 {
 
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void methodA() {
-
+    public void methodA(long id) {
+        User user = new User();
+        user.setId(id);
+        user.setAddress("北极圈");
+        userMapper.updateById(user);
+        int result = 1/0;
     }
 
     @Override
-    public void methodB() {
-
+    public void methodB(long id) {
+        methodA(id);
     }
 }
