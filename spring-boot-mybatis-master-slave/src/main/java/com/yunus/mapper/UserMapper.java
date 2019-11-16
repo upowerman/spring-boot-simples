@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * @author gaoyunfeng
  */
-@Mapper
 public interface UserMapper {
     /**
      * 根据id获取用户

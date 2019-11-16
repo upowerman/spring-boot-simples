@@ -24,6 +24,7 @@ public class UserController {
     public List<User> list(@RequestParam(required = false) String ids,
                            @RequestParam(defaultValue = "0", required = false) Integer offset,
                            @RequestParam(defaultValue = "10", required = false) Integer limit) {
-        return userMapper.list(ids, new RowBounds(0, 2));
+        RowBounds rowBounds = new RowBounds(offset, limit);
+        return userMapper.list(ids, rowBounds);
     }
 }

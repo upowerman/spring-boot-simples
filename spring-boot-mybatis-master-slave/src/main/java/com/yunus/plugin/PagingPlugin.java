@@ -1,15 +1,13 @@
 package com.yunus.plugin;
 
-import org.apache.ibatis.builder.StaticSqlSource;
-import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.statement.RoutingStatementHandler;
+import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.plugin.*;
-import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 import java.lang.reflect.Field;
+import java.sql.Connection;
 import java.util.Properties;
 
 /**
@@ -19,38 +17,32 @@ import java.util.Properties;
  */
 @Intercepts({
         @Signature(
-                type = Executor.class,
-                method = "query",
-                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}
+                type = StatementHandler.class,
+                method = "prepare",
+                args = {Connection.class, Integer.class}
         )
 })
 public class PagingPlugin implements Interceptor {
 
-    private static final Integer MAPPED_STATEMENT_INDEX = 0;
-    private static final Integer PARAMETER_INDEX = 1;
-    private static final Integer ROW_BOUNDS_INDEX = 2;
+    private final static String REGEX = "^\\s*[Ss][Ee][Ll][Ee][Cc][Tt].*$";
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        Object[] args = invocation.getArgs();
-        RowBounds rb = (RowBounds) args[ROW_BOUNDS_INDEX];
-        // 无需分页
-        if (rb == RowBounds.DEFAULT) {
-            return invocation.proceed();
-        }
-        // 将原 RowBounds 参数设为 RowBounds.DEFAULT，关闭 MyBatis 内置的分页机制 args[ROW_BOUNDS_INDEX] = RowBounds.DEFAULT;
-        MappedStatement ms = (MappedStatement) args[MAPPED_STATEMENT_INDEX];
-        BoundSql boundSql = ms.getBoundSql(args[PARAMETER_INDEX]);
-        // 获取 SQL 语句，拼接 limit 语句
+        RoutingStatementHandler handler = (RoutingStatementHandler) invocation.getTarget();
+        // BoundSql类中有一个sql属性，即为待执行的sql语句
+        BoundSql boundSql = handler.getBoundSql();
         String sql = boundSql.getSql();
-        String limit = String.format("LIMIT %d,%d", rb.getOffset(), rb.getLimit());
-        sql = sql + " " + limit;
-        // 创建一个 StaticSqlSource，并将拼接好的 sql 传入
-        SqlSource sqlSource = new StaticSqlSource(ms.getConfiguration(), sql, boundSql.getParameterMappings());
-        // 通过反射获取并设置 MappedStatement 的 sqlSource 字段
-        Field field = MappedStatement.class.getDeclaredField("sqlSource");
-        field.setAccessible(true);
-        field.set(ms, sqlSource);
+        if (sql.matches(REGEX)) {
+            // delegate是RoutingStatementHandler通过mapper映射文件中设置的statementType来指定具体的StatementHandler
+            Object delegate = getFieldValue(handler, "delegate");
+            // rowBounds,即为Mybais 原生的Sql 分页参数,由于Rowbounds 在BaseStateHandler中所以我们需要去找父类
+            RowBounds rowBounds = (RowBounds) getFieldValue(delegate, "rowBounds");
+            // 如果rowBound不为空，且rowBounds的起始位置不为0，则代表我们需要进行分页处理
+            if (rowBounds != null) {
+                // assemSql(...)完成对sql语句的装配及rowBounds的重置操作
+                setFieldValue(boundSql, "sql", assemSql(sql, rowBounds));
+            }
+        }
         return invocation.proceed();
     }
 
@@ -61,6 +53,59 @@ public class PagingPlugin implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
+        String prop1 = properties.getProperty("prop1");
+        String prop2 = properties.getProperty("prop2");
+        System.out.println(prop1 + "------" + prop2);
+    }
 
+    private Object getFieldValue(Object object, String fieldName) {
+        Field field = null;
+        for (Class<?> clazz = object.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
+            try {
+                field = clazz.getDeclaredField(fieldName);
+                if (field != null) {
+                    field.setAccessible(true);
+                    break;
+                }
+
+            } catch (NoSuchFieldException e) {
+                //这里不用做处理，子类没有该字段可能对应的父类有，都没有就返回null。
+            }
+        }
+        try {
+            return field.get(object);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void setFieldValue(Object object, String fieldName, Object value) {
+        Field field = null;
+        for (Class<?> clazz = object.getClass(); clazz != Object.class; clazz = clazz.getSuperclass()) {
+            try {
+                field = clazz.getDeclaredField(fieldName);
+                if (field != null) {
+                    field.setAccessible(true);
+                    try {
+                        field.set(object, value);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                }
+
+            } catch (NoSuchFieldException e) {
+                //这里不用做处理，子类没有该字段可能对应的父类有，都没有就返回null。
+            }
+        }
+    }
+
+    public String assemSql(String oldSql, RowBounds rowBounds) throws Exception {
+        String sql = oldSql + " limit " + rowBounds.getOffset() + "," + rowBounds.getLimit();
+        // 这两步是必须的，因为在前面置换好sql语句以后，实际的结果集就是我们想要的所以offset和limit必须重置为初始值
+        setFieldValue(rowBounds, "offset", RowBounds.NO_ROW_OFFSET);
+        setFieldValue(rowBounds, "limit", RowBounds.NO_ROW_LIMIT);
+        return sql;
     }
 }
