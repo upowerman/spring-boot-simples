@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author gaoyunfeng
+ */
 @RestController
 @RequestMapping("/es")
 public class CustomerController {
@@ -87,7 +90,7 @@ public class CustomerController {
     public Page fetchPageCustomers() {
         System.out.println("Customers found with fetchPageCustomers:");
         System.out.println("-------------------------------");
-        Sort sort = new Sort(Sort.Direction.DESC, "address.keyword");
+        Sort sort = Sort.by(Sort.Direction.DESC, "address.keyword");
         Pageable pageable = PageRequest.of(0, 10, sort);
         Page<Customer> customers=repository.findByAddress("北京", pageable);
         System.out.println("Page customers "+customers.getContent().toString());

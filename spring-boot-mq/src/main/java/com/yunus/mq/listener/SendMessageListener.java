@@ -35,7 +35,7 @@ public class SendMessageListener {
             // 确认消息已经消费成功
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         } catch (Exception e) {
-            logger.error("MQ消息处理异常，消息体:{}", message.getMessageProperties().getCorrelationIdString(), JSON.toJSONString(sendMessage), e);
+            logger.error("MQ消息处理异常，消息体:{}", message.getMessageProperties().getCorrelationId(), JSON.toJSONString(sendMessage), e);
 
             // 确认消息已经消费消费失败，将消息发给下一个消费者
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);

@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,6 +92,7 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback, RabbitTempl
             logger.info("消息发送成功,消息ID:{}", correlationData.getId());
         }
     }
+
 
     /**
      * 用于实现消息发送到RabbitMQ交换器，但无相应队列与交换器绑定时的回调。

@@ -4,6 +4,7 @@ import com.yunus.domain.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
 
@@ -56,10 +57,18 @@ public interface UserMapper {
      */
     @SelectProvider(value = UserProvider.class, method = "list")
     @Results({
-            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "createTime", column = "create_time",jdbcType = JdbcType.DATE),
             @Result(property = "updateTime", column = "update_time")
     })
     List<User> list(@Param("ids") String ids, RowBounds rowBounds);
+
+    /**
+     * xml 中查询
+     *
+     * @param id
+     * @return
+     */
+    User selectOneById(int id);
 
     /**
      * 内部类 生成 sql

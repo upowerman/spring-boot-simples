@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yunus.mapper.UserMapper">
+
+    <resultMap id="rm" type="com.yunus.domain.User">
+        <result property="address" column="address"/>
+        <result property="age" column="age"/>
+        <result property="id" column="id"/>
+        <result property="male" column="male"/>
+        <result property="name" column="name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="selectOneById" resultMap="rm" parameterType="integer">
+        select * from user where id = #{id}
+    </select>
+</mapper>

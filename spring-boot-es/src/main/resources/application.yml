@@ -3,5 +3,5 @@ spring:
     name: spring-boot-es
   data:
     elasticsearch:
-      cluster-name: docker-cluster
-      cluster-nodes: 127.0.0.1:9300
+      cluster-name: es-single
+      cluster-nodes: localhost:9300

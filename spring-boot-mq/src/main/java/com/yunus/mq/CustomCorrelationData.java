@@ -1,7 +1,7 @@
 package com.yunus.mq;
 
 import lombok.Data;
-import org.springframework.amqp.rabbit.support.CorrelationData;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 
 /**
  * 发送消息的相关数据
