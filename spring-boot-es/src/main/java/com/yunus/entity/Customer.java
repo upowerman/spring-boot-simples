@@ -6,6 +6,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+/**
+ * @author gaoyunfeng
+ */
 @Setter
 @Getter
 @Document(indexName = "customer", type = "customer", shards = 1, replicas = 0, refreshInterval = "-1")
