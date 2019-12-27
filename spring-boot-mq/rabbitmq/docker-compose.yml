@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  rabbitmq-server:
+    image: rabbitmq:3.7.21-management
+    container_name: rabbitmq-server
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    hostname: rabbitmqone
+    networks:
+      - rabbitmq-network
+networks:
+  rabbitmq-network:
+    driver: bridge
