@@ -1,6 +1,7 @@
 package com.yunus.aspect;
 
 
+import com.yunus.annotation.Login;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -18,8 +19,8 @@ public class AspectFoo {
 
     }
 
-    @Before("point()")
-    public void before(JoinPoint joinPoint) {
+    @Before("@annotation(login)")
+    public void before(JoinPoint joinPoint, Login login) {
         System.out.println("切面类--before方法执行");
     }
 

@@ -16,6 +16,8 @@
     <packaging>pom</packaging>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <spring-social-config.versino>1.1.6.RELEASE</spring-social-config.versino>
         <spring-contect-support.version>5.0.10.RELEASE</spring-contect-support.version>
         <guava.version>27.0.1-jre</guava.version>
@@ -56,6 +58,7 @@
         <module>spring-boot-activiti-simples</module>
         <module>spring-boot-canal</module>
         <module>spring-boot-mybatis-master-slave</module>
+        <module>spring-security</module>
     </modules>
 
     <dependencyManagement>
