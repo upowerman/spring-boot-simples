@@ -5,6 +5,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
+ * 此种认证方式都是security 自己生成的不是我们自定义的
+ *
  * @author gaoyunfeng
  */
 @Configuration
