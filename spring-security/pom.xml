@@ -16,6 +16,8 @@
         <module>spring-security-first</module>
         <module>spring-security-two</module>
         <module>spring-security-three</module>
+        <module>spring-security-oauth2</module>
+        <module>spring-security-oauth2-config</module>
     </modules>
 
     <dependencies>
