@@ -25,7 +25,7 @@
         <hutool.version>4.1.12</hutool.version>
         <druid.version>1.1.5</druid.version>
         <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
-        <quartz.version>2.3.0</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
         <fastjson.version>1.2.54</fastjson.version>
         <logstash-logback.version>5.3</logstash-logback.version>
         <activiti.version>6.0.0</activiti.version>
