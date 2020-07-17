@@ -31,6 +31,7 @@
         <activiti.version>6.0.0</activiti.version>
         <h2.version>1.4.197</h2.version>
         <canal.version>1.1.0</canal.version>
+        <mybatisplus.version>3.3.2</mybatisplus.version>
     </properties>
 
     <modules>
@@ -58,6 +59,7 @@
         <module>spring-boot-canal</module>
         <module>spring-boot-mybatis-master-slave</module>
         <module>spring-security</module>
+        <module>spring-boot-mybatis-plus</module>
     </modules>
 
     <dependencyManagement>
@@ -145,6 +147,21 @@
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
                 <version>${canal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatisplus.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
