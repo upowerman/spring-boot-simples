@@ -7,7 +7,7 @@ spring:
     name:  spring-boot-mybatis-plus
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&serverTimezone=GMT&useSSL=false&characterEncoding=utf8
     password: root
     username: root
 logging:
@@ -15,3 +15,7 @@ logging:
     com.yunus.mapper: debug
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    db-config:
+      update-strategy: not_null
+      table-underline: true
