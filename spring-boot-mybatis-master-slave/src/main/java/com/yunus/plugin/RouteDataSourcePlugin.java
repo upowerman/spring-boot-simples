@@ -38,6 +38,9 @@ public class RouteDataSourcePlugin implements Interceptor {
 
     private static final String REGEX = ".*insert\\u0020.*|.*delete\\u0020.*|.*update\\u0020.*";
 
+    /**
+     * 缓存每个MappedStatement id 对应的数据库  mybatis MappedStatement 生成规则为  mapper 接口名+方法名
+     */
     private static final Map<String, RouteDataSourceKeyEnum> cacheMap = new ConcurrentHashMap<>();
 
     @Override
