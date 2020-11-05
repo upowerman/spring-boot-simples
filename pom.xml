@@ -32,6 +32,9 @@
         <h2.version>1.4.197</h2.version>
         <canal.version>1.1.0</canal.version>
         <mybatisplus.version>3.3.2</mybatisplus.version>
+        <graphql.version>7.1.0</graphql.version>
+        <graphql-java-tools.version>6.2.0</graphql-java-tools.version>
+        <graphql-java-extended-scalars.version>1.0.1</graphql-java-extended-scalars.version>
     </properties>
 
     <modules>
@@ -60,6 +63,7 @@
         <module>spring-boot-mybatis-master-slave</module>
         <module>spring-security</module>
         <module>spring-boot-mybatis-plus</module>
+        <module>spring-boot-GraphQL</module>
     </modules>
 
     <dependencyManagement>
@@ -162,6 +166,27 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatisplus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>graphql-spring-boot-starter-test</artifactId>
+                <version>${graphql.version}</version>
+            </dependency>
+            <!-- graphql -->
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>graphql-spring-boot-starter</artifactId>
+                <version>${graphql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>graphql-java-tools</artifactId>
+                <version>${graphql-java-tools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java-extended-scalars</artifactId>
+                <version>${graphql-java-extended-scalars.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
