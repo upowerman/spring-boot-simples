@@ -4,10 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.listener.ConsumerRecordRecoverer;
-import org.springframework.kafka.listener.DeadLetterPublishingRecoverer;
-import org.springframework.kafka.listener.ErrorHandler;
-import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
+import org.springframework.kafka.listener.*;
 import org.springframework.util.backoff.BackOff;
 import org.springframework.util.backoff.FixedBackOff;
 

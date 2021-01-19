@@ -1,6 +1,7 @@
 package com.yunus.producer;
 
-import com.yunus.msg.Message;
+import com.yunus.msg.BaseMessage;
+import com.yunus.msg.OrderMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -18,23 +19,23 @@ import java.util.concurrent.ExecutionException;
 @Component
 public class MsgProducer {
 
-    private final KafkaTemplate<String, Message> kafkaTemplate;
+    private final KafkaTemplate<String, BaseMessage> kafkaTemplate;
 
-    public MsgProducer(final KafkaTemplate<String, Message> kafkaTemplate) {
+    public MsgProducer(final KafkaTemplate<String, BaseMessage> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public SendResult<String, Message> syncSend(String topic, Message msg) throws ExecutionException, InterruptedException {
+    public SendResult<String, BaseMessage> syncSend(String topic, OrderMessage msg) throws ExecutionException, InterruptedException {
         // 同步发送消息
         return kafkaTemplate.send(topic, msg).get();
     }
 
-    public SendResult<String, Message> syncSend(String topic, String key, Integer partition, Message msg) throws ExecutionException, InterruptedException {
+    public SendResult<String, BaseMessage> syncSend(String topic, String key, Integer partition, OrderMessage msg) throws ExecutionException, InterruptedException {
         // 同步发送消息
         return kafkaTemplate.send(topic, partition, key, msg).get();
     }
 
-    public ListenableFuture<SendResult<String, Message>> asyncSend(String topic, Message msg) {
+    public ListenableFuture<SendResult<String, BaseMessage>> asyncSend(String topic, OrderMessage msg) {
         // 异步发送消息
         return kafkaTemplate.send(topic, msg);
     }

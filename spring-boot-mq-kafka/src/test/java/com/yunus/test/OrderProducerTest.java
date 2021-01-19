@@ -1,7 +1,8 @@
 package com.yunus.test;
 
 import com.yunus.KafkaBootStrapServer;
-import com.yunus.msg.Message;
+import com.yunus.msg.BaseMessage;
+import com.yunus.msg.OrderMessage;
 import com.yunus.producer.MsgProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -24,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = KafkaBootStrapServer.class)
-public class ProducerTest {
+public class OrderProducerTest {
 
     @Autowired
     private MsgProducer producer;
@@ -32,8 +33,8 @@ public class ProducerTest {
     @Test
     public void testSyncSend() throws ExecutionException, InterruptedException {
         String msgId = UUID.randomUUID().toString();
-        Message message = new Message(msgId, "Hello World");
-        SendResult<String, Message> result = producer.syncSend("mytopic", message);
+        OrderMessage message = new OrderMessage(msgId, "Hello World");
+        SendResult<String, BaseMessage> result = producer.syncSend("order-topic", message);
         log.info("[testSyncSend][发送内容：[{}] 发送结果：[{}]]", message, result);
         // 阻塞等待，保证消费
         new CountDownLatch(1).await();
@@ -42,16 +43,16 @@ public class ProducerTest {
     @Test
     public void testASyncSend() throws InterruptedException {
         String msgId = UUID.randomUUID().toString();
-        Message message = new Message(msgId, "Hello World");
-        producer.asyncSend("mytopic", message).addCallback(new ListenableFutureCallback<SendResult<String, Message>>() {
+        OrderMessage message = new OrderMessage(msgId, "Hello World");
 
+        producer.asyncSend("order-topic", message).addCallback(new ListenableFutureCallback<SendResult<String, BaseMessage>>() {
             @Override
             public void onFailure(Throwable ex) {
                 log.info("[testASyncSend][发送内容：[{}] 发送异常]]", message, ex);
             }
 
             @Override
-            public void onSuccess(SendResult<String, Message> result) {
+            public void onSuccess(SendResult<String, BaseMessage> result) {
                 log.info("[testASyncSend][发送内容：[{}] 发送成功，结果为：[{}]]", message, result);
             }
         });
