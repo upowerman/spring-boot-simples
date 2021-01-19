@@ -17,6 +17,7 @@ spring:
     consumer:
       group-id: dev  # 默认分组  可以在KafkaListener(groupId = "demo01-consumer-group")配置优先级更高的groupId
       auto-offset-reset: earliest # 设置消费者分组最初的消费进度为 earliest 。可参考博客 https://blog.csdn.net/lishuangzhe7047/article/details/74530417 理解
+      enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:

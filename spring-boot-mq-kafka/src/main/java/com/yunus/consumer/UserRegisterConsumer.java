@@ -2,7 +2,6 @@ package com.yunus.consumer;
 
 import com.yunus.msg.UserRegisterMessage;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -15,16 +14,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserRegisterConsumer {
 
-    @Value("${server.port}")
-    private Integer port;
-
     @KafkaListener(topics = "user-register-topic", groupId = "dev")
     public void listen(UserRegisterMessage message) {
-        log.info("dev+" + port + "接收消息: {}", message);
+        log.info("【topic=user-register-topic】【groupId=dev】" + "接收消息: {}", message);
     }
 
     @KafkaListener(topics = "user-register-topic", groupId = "pro")
     public void listen2(UserRegisterMessage message) {
-        log.info("pro+" + port + "接收消息: {}", message);
+        log.info("【topic=user-register-topic】【groupId=pro】" + "接收消息: {}", message);
     }
 }

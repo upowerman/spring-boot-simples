@@ -32,10 +32,12 @@ public class OrderProducerTest {
 
     @Test
     public void testSyncSend() throws ExecutionException, InterruptedException {
-        String msgId = UUID.randomUUID().toString();
-        OrderMessage message = new OrderMessage(msgId, "Hello World");
-        SendResult<String, BaseMessage> result = producer.syncSend("order-topic", message);
-        log.info("[testSyncSend][发送内容：[{}] 发送结果：[{}]]", message, result);
+        for (int i = 0; i < 10; i++) {
+            String msgId = UUID.randomUUID().toString();
+            OrderMessage message = new OrderMessage(msgId, "第" + i + "条Hello World");
+            SendResult<String, BaseMessage> result = producer.syncSend("order-topic", i + "", 0, message);
+            log.info("[testSyncSend][发送内容：[{}] 发送结果：[{}]]", message, result);
+        }
         // 阻塞等待，保证消费
         new CountDownLatch(1).await();
     }

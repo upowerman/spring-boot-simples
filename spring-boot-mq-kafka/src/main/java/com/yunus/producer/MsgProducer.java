@@ -25,17 +25,17 @@ public class MsgProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public SendResult<String, BaseMessage> syncSend(String topic, OrderMessage msg) throws ExecutionException, InterruptedException {
+    public SendResult<String, BaseMessage> syncSend(String topic, BaseMessage msg) throws ExecutionException, InterruptedException {
         // 同步发送消息
         return kafkaTemplate.send(topic, msg).get();
     }
 
-    public SendResult<String, BaseMessage> syncSend(String topic, String key, Integer partition, OrderMessage msg) throws ExecutionException, InterruptedException {
+    public SendResult<String, BaseMessage> syncSend(String topic, String key, Integer partition, BaseMessage msg) throws ExecutionException, InterruptedException {
         // 同步发送消息
         return kafkaTemplate.send(topic, partition, key, msg).get();
     }
 
-    public ListenableFuture<SendResult<String, BaseMessage>> asyncSend(String topic, OrderMessage msg) {
+    public ListenableFuture<SendResult<String, BaseMessage>> asyncSend(String topic, BaseMessage msg) {
         // 异步发送消息
         return kafkaTemplate.send(topic, msg);
     }
