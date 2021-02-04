@@ -61,7 +61,6 @@
         <module>spring-boot-activiti-simples</module>
         <module>spring-boot-canal</module>
         <module>spring-boot-mybatis-master-slave</module>
-        <module>spring-security</module>
         <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-GraphQL</module>
     </modules>

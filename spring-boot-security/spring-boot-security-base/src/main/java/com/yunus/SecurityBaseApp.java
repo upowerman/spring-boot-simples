@@ -4,12 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @Author: gaoyunfeng
- * @date: 2019/3/14
+ * @author gaoyunfeng
+ * @Description:
+ * @date 2021/2/4 15:48
  */
 @SpringBootApplication
-public class SecurityBootStrap {
+public class SecurityBaseApp {
     public static void main(String[] args) {
-        SpringApplication.run(SecurityBootStrap.class, args);
+        SpringApplication.run(SecurityBaseApp.class, args);
     }
 }
