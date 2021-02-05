@@ -2,6 +2,7 @@ package com.yunus.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@ToString
 public class SysRoleMenu implements Serializable {
     @Id
     @Column(name = "role_id")

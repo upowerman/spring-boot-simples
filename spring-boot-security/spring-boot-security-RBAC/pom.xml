@@ -26,6 +26,11 @@
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!--Token生成与解析-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

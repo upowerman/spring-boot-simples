@@ -21,6 +21,10 @@ public class RepositoryTest {
 
     @Test
     public void findAll() {
+        userRepository.deleteById(1L);
         Iterable<SysUser> all = userRepository.findAll();
+        for (SysUser sysUser : all) {
+            System.out.println(sysUser);
+        }
     }
 }

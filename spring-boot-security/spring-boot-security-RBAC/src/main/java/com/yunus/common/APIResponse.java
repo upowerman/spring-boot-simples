@@ -1,5 +1,7 @@
 package com.yunus.common;
 
+import com.yunus.common.exception.CommonCode;
+import com.yunus.common.exception.ErrorCode;
 import lombok.Data;
 
 /**
@@ -29,6 +31,27 @@ public class APIResponse<T> {
         response.setCode(DEFAULT_SUCCESS_CODE);
         response.setMsg(DEFAULT_SUCCESS_MSG);
         response.setData(data);
+        return response;
+    }
+
+    public static <T> APIResponse<T> fail() {
+        APIResponse<T> response = new APIResponse<T>();
+        response.setCode(CommonCode.FAILED.getCode());
+        response.setMsg(CommonCode.FAILED.getMsg());
+        return response;
+    }
+
+    public static <T> APIResponse<T> fail(ErrorCode errorCode) {
+        APIResponse<T> response = new APIResponse<T>();
+        response.setCode(errorCode.getCode());
+        response.setMsg(errorCode.getMsg());
+        return response;
+    }
+
+    public static <T> APIResponse<T> fail(Integer errorCode, String msg) {
+        APIResponse<T> response = new APIResponse<T>();
+        response.setCode(errorCode);
+        response.setMsg(msg);
         return response;
     }
 }

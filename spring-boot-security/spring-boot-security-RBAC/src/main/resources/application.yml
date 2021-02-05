@@ -6,9 +6,7 @@ spring:
     data: "classpath:db/${database}/data.sql"
     sql-script-encoding: UTF-8
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: none
     open-in-view: false
-
-

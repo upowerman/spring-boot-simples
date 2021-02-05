@@ -1,3 +1,5 @@
+# noinspection SqlNoDataSourceInspectionForFile
+
 -- 1、用户信息表
 drop table if exists sys_user;
 create table sys_user
@@ -45,4 +47,14 @@ create table sys_role_menu
     role_id bigint not null,
     menu_id bigint not null,
     primary key (role_id, menu_id)
+);
+
+-- 5、用户token
+drop table if exists sys_sys_token;
+create table sys_sys_token
+(
+    id      bigint IDENTITY primary key,
+    user_id bigint   not null,
+    token   varchar(100) default null,
+    expire  datetime not null
 );

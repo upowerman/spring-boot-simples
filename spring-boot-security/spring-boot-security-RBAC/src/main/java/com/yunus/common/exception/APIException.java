@@ -1,4 +1,4 @@
-package com.yunus.common;
+package com.yunus.common.exception;
 
 import lombok.Getter;
 
@@ -10,6 +10,11 @@ public class APIException extends RuntimeException {
     private int errorCode;
     @Getter
     private String errorMessage;
+
+    public APIException(ErrorCode errorCode) {
+        this.errorCode = errorCode.getCode();
+        this.errorMessage = errorCode.getMsg();
+    }
 
     public APIException(int errorCode, String errorMessage) {
         super(errorMessage);

@@ -23,6 +23,8 @@ insert into sys_user_role
 values ('1', '1');
 insert into sys_user_role
 values ('2', '2');
+insert into sys_user_role
+values ('2', '1');
 
 -- 初始化-角色和菜单关联表数据
 insert into sys_role_menu
