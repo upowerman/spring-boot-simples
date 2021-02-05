@@ -10,10 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-boot-security</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
 
     <modules>
         <module>spring-boot-security-base</module>
+        <module>spring-boot-security-RBAC</module>
     </modules>
 
     <dependencies>
@@ -28,6 +28,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 

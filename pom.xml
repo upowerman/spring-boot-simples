@@ -44,7 +44,6 @@
         <module>spring-boot-mq</module>
         <module>spring-boot-docker</module>
         <module>spring-boot-websocket</module>
-        <module>spring-boot-security</module>
         <module>spring-boot-transaction</module>
         <module>spring-boot-quartz</module>
         <module>spring-boot-quartz2</module>
@@ -63,6 +62,7 @@
         <module>spring-boot-mybatis-master-slave</module>
         <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-GraphQL</module>
+        <module>spring-boot-security</module>
     </modules>
 
     <dependencyManagement>
