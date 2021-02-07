@@ -1,8 +1,8 @@
 -- 初始化-用户信息表数据
 insert into sys_user
-values (1, 'admin', 'admin');
+values (1, 'admin', '$2a$10$wyBLOi4OJv88SsE704Rzbe3FduBRRDMEJeueHmEBmG69cAGo9xo6G');
 insert into sys_user
-values (2, 'luke', 'luke');
+values (2, 'luke', '$2a$10$gR6TjwejuBUiF/Fju9XbUeWT6wdpm1HrPRQ3gwoxTAC031wumJfzi');
 
 -- 初始化-角色信息表数据
 insert into sys_role

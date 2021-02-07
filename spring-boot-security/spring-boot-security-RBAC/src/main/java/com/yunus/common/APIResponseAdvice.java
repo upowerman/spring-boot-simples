@@ -3,12 +3,14 @@ package com.yunus.common;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.util.Objects;
@@ -18,8 +20,10 @@ import java.util.Objects;
  */
 
 @Slf4j
-@RestControllerAdvice
+@ControllerAdvice
 public class APIResponseAdvice implements ResponseBodyAdvice<Object> {
+
+
 
     /**
      * 仅当方法或类没有标记@NoAPIResponse才自动包装

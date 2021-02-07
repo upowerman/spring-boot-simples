@@ -23,19 +23,16 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(APIException.class)
-    public APIResponse<?> handleApiException(HttpServletRequest request, APIException ex) {
+    public APIResponse<Object> handleApiException(HttpServletRequest request, APIException ex) {
         log.error("process url {} failed", request.getRequestURL().toString(), ex);
-        APIResponse<?> apiResponse = new APIResponse<>();
-        apiResponse.setCode(ex.getErrorCode());
-        apiResponse.setMsg(ex.getErrorMessage());
-        return apiResponse;
+        return APIResponse.fail(ex.getErrorCode(), ex.getErrorMessage());
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public APIResponse<?> handleValidException(MethodArgumentNotValidException e) {
         BindingResult bindingResult = e.getBindingResult();
         String message = getBindingResultMsg(bindingResult);
-        return APIResponse.fail(CommonCode.VALIDATE_FAILED.getCode(), message);
+        return APIResponse.fail(CommonErrorCode.VALIDATE_FAILED.getCode(), message);
     }
 
     @ResponseBody
@@ -43,7 +40,7 @@ public class GlobalExceptionHandler {
     public APIResponse<?> handleValidException(BindException e) {
         BindingResult bindingResult = e.getBindingResult();
         String message = getBindingResultMsg(bindingResult);
-        return APIResponse.fail(CommonCode.VALIDATE_FAILED.getCode(), message);
+        return APIResponse.fail(CommonErrorCode.VALIDATE_FAILED.getCode(), message);
     }
 
     private String getBindingResultMsg(BindingResult bindingResult) {

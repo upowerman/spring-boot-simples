@@ -17,4 +17,13 @@ public interface SysUserTokenRepository extends CrudRepository<SysUserToken, Lon
      * @return
      */
     SysUserToken findByUserId(Long userId);
+
+    /**
+     * 根据token 获取
+     *
+     * @param token token
+     * @return
+     */
+    SysUserToken findByToken(String token);
+
 }

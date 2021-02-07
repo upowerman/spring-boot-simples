@@ -5,13 +5,12 @@ import com.yunus.domain.SysRole;
 import com.yunus.domain.SysUser;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -52,7 +51,11 @@ public class SysUserDetail implements UserDetails {
         for (SysRole role : roles) {
             Set<SysMenu> perms = role.getPerms();
             if (!CollectionUtils.isEmpty(perms)) {
-                permissions.addAll(perms.stream().map(SysMenu::getPerms).collect(Collectors.toSet()));
+                for (SysMenu perm : perms) {
+                    if (!StringUtils.isEmpty(perm)) {
+                        permissions.addAll(Arrays.asList(perm.getPerms().trim().split(",")));
+                    }
+                }
             }
         }
         return permissions;
@@ -60,7 +63,14 @@ public class SysUserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if (CollectionUtils.isEmpty(permissions)) {
+            return null;
+        }
+        Set<GrantedAuthority> perms = new HashSet<>();
+        for (String permission : permissions) {
+            perms.add(new SimpleGrantedAuthority(permission));
+        }
+        return perms;
     }
 
     @Override

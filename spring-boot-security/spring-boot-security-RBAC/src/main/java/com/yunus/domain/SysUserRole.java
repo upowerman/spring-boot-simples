@@ -1,5 +1,6 @@
 package com.yunus.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,7 @@ import java.io.Serializable;
  * @Description:
  * @date 2021/2/5 9:40
  */
-@Getter
-@Setter
+@Data
 @Entity
 public class SysUserRole implements Serializable {
 

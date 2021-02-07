@@ -1,0 +1,63 @@
+package com.yunus.security;
+
+import com.yunus.common.Constants;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.annotation.Resource;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * @author gaoyunfeng
+ * @Description:
+ * @date 2021/2/5 18:03
+ */
+@Component
+public class AuthenticationTokenFilter extends OncePerRequestFilter {
+
+    private final TokenService tokenService;
+
+    public AuthenticationTokenFilter(final TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        String token = getToken(request);
+        if (!StringUtils.isEmpty(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
+            tokenService.verifyToken(token);
+            UserDetails userDetails = tokenService.getUserDetailByToken(token);
+            // 设置
+            if (userDetails != null) {
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        }
+        chain.doFilter(request, response);
+    }
+
+    /**
+     * 获取请求token
+     *
+     * @param request
+     * @return token
+     */
+    public String getToken(HttpServletRequest request) {
+        String token = request.getHeader(Constants.TOKEN_HEADER);
+        if (!StringUtils.isEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
+        return token;
+    }
+}

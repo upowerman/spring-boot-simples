@@ -1,7 +1,8 @@
 package com.yunus.service.impl;
 
 import com.yunus.common.exception.APIException;
-import com.yunus.common.exception.CommonCode;
+import com.yunus.common.exception.CommonErrorCode;
+import com.yunus.common.exception.UserErrorCode;
 import com.yunus.domain.SysUserToken;
 import com.yunus.pojo.SysLoginFormDTO;
 import com.yunus.security.SysUserDetail;
@@ -42,9 +43,9 @@ public class SysUserLoginServiceImpl implements SysUserLoginService {
         } catch (Exception e) {
             // 发生异常，说明验证不通过
             if (e instanceof BadCredentialsException) {
-                throw new APIException(CommonCode.USER_PASSWORD_NOT_MATCH);
+                throw new APIException(UserErrorCode.USER_PASSWORD_NOT_MATCH);
             } else {
-                throw new APIException(CommonCode.FAILED);
+                throw new APIException(CommonErrorCode.FAILED);
             }
         }
         // 生成 Token

@@ -1,9 +1,9 @@
 package com.yunus.config;
 
-import com.yunus.security.AuthenticationEntryPointImpl;
-import com.yunus.security.JwtAuthenticationTokenFilter;
-import com.yunus.security.LogoutSuccessHandlerImpl;
+import com.yunus.security.AuthAuthenticationEntryPoint;
+import com.yunus.security.AuthenticationTokenFilter;
 import com.yunus.service.impl.SysUserLoginServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,6 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.annotation.Resource;
 
@@ -24,32 +25,22 @@ import javax.annotation.Resource;
  * @see "http://www.iocoder.cn/Spring-Boot/Spring-Security/?self"
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * 自定义用户认证逻辑
-     */
-    @Resource
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationTokenFilter authenticationTokenFilter;
+    private final AuthAuthenticationEntryPoint authenticationEntryPoint;
+    private final LogoutSuccessHandler logoutSuccessHandler;
 
-    /**
-     * 认证失败处理类
-     */
-    @Resource
-    private AuthenticationEntryPointImpl unauthorizedHandler;
-
-    /**
-     * 退出处理类
-     */
-    @Resource
-    private LogoutSuccessHandlerImpl logoutSuccessHandler;
-
-    /**
-     * token 认证过滤器
-     */
-    @Resource
-    private JwtAuthenticationTokenFilter authenticationTokenFilter;
+    public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
+                          AuthenticationTokenFilter authenticationTokenFilter,
+                          AuthAuthenticationEntryPoint authenticationEntryPoint,
+                          LogoutSuccessHandler logoutSuccessHandler) {
+        this.userDetailsService = userDetailsService;
+        this.authenticationTokenFilter = authenticationTokenFilter;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+        this.logoutSuccessHandler = logoutSuccessHandler;
+    }
 
     /**
      * 需要把AuthenticationManager主动暴漏出来
@@ -90,14 +81,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 // CRSF禁用，因为不使用session
                 .csrf().disable()
-                // 认证失败处理类
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                // <X> 认证失败处理类
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
                 // 基于token，所以不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // 过滤请求
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/sys-user/login", "/captchaImage").anonymous()
+                .antMatchers("/sys-user/login").permitAll()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
@@ -110,7 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().disable();
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
-        //添加 JWT filter
         http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 }

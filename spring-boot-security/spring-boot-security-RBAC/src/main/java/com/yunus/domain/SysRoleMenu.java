@@ -1,5 +1,6 @@
 package com.yunus.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,10 +15,8 @@ import java.io.Serializable;
  * @Description:
  * @date 2021/2/5 9:40
  */
-@Getter
-@Setter
+@Data
 @Entity
-@ToString
 public class SysRoleMenu implements Serializable {
     @Id
     @Column(name = "role_id")

@@ -1,6 +1,6 @@
 package com.yunus.common;
 
-import com.yunus.common.exception.CommonCode;
+import com.yunus.common.exception.CommonErrorCode;
 import com.yunus.common.exception.ErrorCode;
 import lombok.Data;
 
@@ -36,8 +36,8 @@ public class APIResponse<T> {
 
     public static <T> APIResponse<T> fail() {
         APIResponse<T> response = new APIResponse<T>();
-        response.setCode(CommonCode.FAILED.getCode());
-        response.setMsg(CommonCode.FAILED.getMsg());
+        response.setCode(CommonErrorCode.FAILED.getCode());
+        response.setMsg(CommonErrorCode.FAILED.getMsg());
         return response;
     }
 

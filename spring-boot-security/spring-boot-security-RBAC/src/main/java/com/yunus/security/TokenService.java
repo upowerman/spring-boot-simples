@@ -1,20 +1,15 @@
 package com.yunus.security;
 
-import com.yunus.common.Constants;
+import com.yunus.common.exception.APIException;
+import com.yunus.common.exception.CommonErrorCode;
+import com.yunus.dao.SysUserRepository;
 import com.yunus.dao.SysUserTokenRepository;
+import com.yunus.domain.SysUser;
 import com.yunus.domain.SysUserToken;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static com.yunus.common.Constants.MILLIS_MINUTE;
 
@@ -31,9 +26,12 @@ public class TokenService {
     private static final Long EXPIRE = 30 * MILLIS_MINUTE;
 
     private final SysUserTokenRepository sysUserTokenRepository;
+    private final SysUserRepository sysUserRepository;
 
-    public TokenService(final SysUserTokenRepository sysUserTokenRepository) {
+    public TokenService(final SysUserTokenRepository sysUserTokenRepository,
+                        final SysUserRepository sysUserRepository) {
         this.sysUserTokenRepository = sysUserTokenRepository;
+        this.sysUserRepository = sysUserRepository;
     }
 
     public SysUserToken createToken(long userId) {
@@ -44,34 +42,51 @@ public class TokenService {
         //生成token
         String token = generateToken();
         //保存或更新用户token
-        SysUserToken tokenEntity = new SysUserToken();
-        tokenEntity.setUserId(userId);
-        tokenEntity.setToken(token);
-        tokenEntity.setExpire(expireTime);
-        sysUserTokenRepository.save(tokenEntity);
-        return tokenEntity;
+        SysUserToken userToken = sysUserTokenRepository.findByUserId(userId);
+        if (userToken == null) {
+            userToken = new SysUserToken();
+            userToken.setUserId(userId);
+            userToken.setToken(token);
+            userToken.setExpire(expireTime);
+        } else {
+            userToken.setToken(token);
+            userToken.setExpire(expireTime);
+        }
+        sysUserTokenRepository.save(userToken);
+        return userToken;
     }
 
     public void expireToken(long userId) {
-        Date now = new Date();
-        SysUserToken tokenEntity = new SysUserToken();
-        tokenEntity.setUserId(userId);
-        tokenEntity.setExpire(now);
-        sysUserTokenRepository.save(tokenEntity);
+        SysUserToken token = sysUserTokenRepository.findByUserId(userId);
+        if (token == null) {
+            return;
+        }
+        token.setUserId(userId);
+        token.setExpire(new Date());
+        sysUserTokenRepository.save(token);
     }
 
-    /**
-     * 获取请求token
-     *
-     * @param request
-     * @return token
-     */
-    public String getToken(HttpServletRequest request) {
-        String token = request.getHeader(Constants.TOKEN_HEADER);
-        if (!StringUtils.isEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
-            token = token.replace(Constants.TOKEN_PREFIX, "");
+    public void verifyToken(String token) {
+        if (StringUtils.isEmpty(token)) {
+            throw new APIException(CommonErrorCode.UNAUTHORIZED);
         }
-        return token;
+        SysUserToken userToken = sysUserTokenRepository.findByToken(token);
+        if (userToken == null) {
+            throw new APIException(CommonErrorCode.TOKEN_EXPIRE);
+        }
+        Date expire = userToken.getExpire();
+        if (expire.before(new Date())) {
+            throw new APIException(CommonErrorCode.TOKEN_EXPIRE);
+        }
+    }
+
+    public SysUserDetail getUserDetailByToken(String token) {
+        SysUserToken userToken = sysUserTokenRepository.findByToken(token);
+        if (userToken == null) {
+            throw new APIException(CommonErrorCode.TOKEN_EXPIRE);
+        }
+        Optional<SysUser> sysUser = sysUserRepository.findById(userToken.getUserId());
+        return new SysUserDetail(sysUser.orElseThrow(() -> new APIException(CommonErrorCode.FAILED)));
     }
 
     private String generateToken() {
