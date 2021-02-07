@@ -3,14 +3,16 @@ package com.yunus.common.exception;
 
 import com.yunus.common.APIResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.annotation.Priority;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @RestControllerAdvice
+@Priority(-1)
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(APIException.class)
@@ -35,7 +38,6 @@ public class GlobalExceptionHandler {
         return APIResponse.fail(CommonErrorCode.VALIDATE_FAILED.getCode(), message);
     }
 
-    @ResponseBody
     @ExceptionHandler(value = BindException.class)
     public APIResponse<?> handleValidException(BindException e) {
         BindingResult bindingResult = e.getBindingResult();
@@ -54,15 +56,4 @@ public class GlobalExceptionHandler {
         return message;
     }
 
-    /**
-     * 统一返回
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = Exception.class)
-    public APIResponse<?> exception(Exception e) {
-        log.error("【GlobalExceptionHandler】处理未知异常", e);
-        return APIResponse.fail();
-    }
 }

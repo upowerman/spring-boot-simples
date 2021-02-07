@@ -33,7 +33,7 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        String token = getToken(request);
+        String token = tokenService.getToken(request);
         if (!StringUtils.isEmpty(token) && SecurityContextHolder.getContext().getAuthentication() == null) {
             tokenService.verifyToken(token);
             UserDetails userDetails = tokenService.getUserDetailByToken(token);
@@ -45,19 +45,5 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(request, response);
-    }
-
-    /**
-     * 获取请求token
-     *
-     * @param request
-     * @return token
-     */
-    public String getToken(HttpServletRequest request) {
-        String token = request.getHeader(Constants.TOKEN_HEADER);
-        if (!StringUtils.isEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
-            token = token.replace(Constants.TOKEN_PREFIX, "");
-        }
-        return token;
     }
 }

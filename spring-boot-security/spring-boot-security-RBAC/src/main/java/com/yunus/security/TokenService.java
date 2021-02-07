@@ -1,5 +1,6 @@
 package com.yunus.security;
 
+import com.yunus.common.Constants;
 import com.yunus.common.exception.APIException;
 import com.yunus.common.exception.CommonErrorCode;
 import com.yunus.dao.SysUserRepository;
@@ -9,6 +10,7 @@ import com.yunus.domain.SysUserToken;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 import static com.yunus.common.Constants.MILLIS_MINUTE;
@@ -56,6 +58,20 @@ public class TokenService {
         return userToken;
     }
 
+    /**
+     * 获取请求token
+     *
+     * @param request
+     * @return token
+     */
+    public String getToken(HttpServletRequest request) {
+        String token = request.getHeader(Constants.TOKEN_HEADER);
+        if (!StringUtils.isEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
+        return token;
+    }
+
     public void expireToken(long userId) {
         SysUserToken token = sysUserTokenRepository.findByUserId(userId);
         if (token == null) {
@@ -81,12 +97,17 @@ public class TokenService {
     }
 
     public SysUserDetail getUserDetailByToken(String token) {
+        SysUser sysUser = getSysUserByToken(token);
+        return new SysUserDetail(sysUser);
+    }
+
+    public SysUser getSysUserByToken(String token) {
         SysUserToken userToken = sysUserTokenRepository.findByToken(token);
         if (userToken == null) {
             throw new APIException(CommonErrorCode.TOKEN_EXPIRE);
         }
         Optional<SysUser> sysUser = sysUserRepository.findById(userToken.getUserId());
-        return new SysUserDetail(sysUser.orElseThrow(() -> new APIException(CommonErrorCode.FAILED)));
+        return sysUser.orElseThrow(() -> new APIException(CommonErrorCode.FAILED));
     }
 
     private String generateToken() {

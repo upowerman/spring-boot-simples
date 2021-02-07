@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -24,22 +25,25 @@ import javax.annotation.Resource;
  * @author M4500
  * @see "http://www.iocoder.cn/Spring-Boot/Spring-Security/?self"
  */
-@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final AuthenticationTokenFilter authenticationTokenFilter;
     private final AuthAuthenticationEntryPoint authenticationEntryPoint;
     private final LogoutSuccessHandler logoutSuccessHandler;
+    private final AccessDeniedHandler accessDeniedHandler;
 
     public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
                           AuthenticationTokenFilter authenticationTokenFilter,
                           AuthAuthenticationEntryPoint authenticationEntryPoint,
-                          LogoutSuccessHandler logoutSuccessHandler) {
+                          LogoutSuccessHandler logoutSuccessHandler,
+                          final AccessDeniedHandler accessDeniedHandler) {
         this.userDetailsService = userDetailsService;
         this.authenticationTokenFilter = authenticationTokenFilter;
         this.authenticationEntryPoint = authenticationEntryPoint;
         this.logoutSuccessHandler = logoutSuccessHandler;
+        this.accessDeniedHandler = accessDeniedHandler;
     }
 
     /**
@@ -82,7 +86,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // CRSF禁用，因为不使用session
                 .csrf().disable()
                 // <X> 认证失败处理类
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler)
+                .and()
                 // 基于token，所以不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 // 过滤请求
