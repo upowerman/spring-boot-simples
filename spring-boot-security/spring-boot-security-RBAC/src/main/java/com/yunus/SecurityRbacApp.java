@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author gaoyunfeng
- * @Description:
+ * @see "https://niocoder.com/categories/#Security"
+ * @see "https://www.cnkirito.moe/"
  * @date 2021/2/4 15:48
  */
 @SpringBootApplication
