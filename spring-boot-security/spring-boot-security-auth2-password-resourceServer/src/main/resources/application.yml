@@ -9,6 +9,7 @@ security:
       client-secret: 112233
     # OAuth2 Resource 配置，对应 ResourceServerProperties 类
     resource:
+      # 查看CheckTokenEndpoint
       token-info-uri: http://127.0.0.1:8080/oauth/check_token # 获得 Token 信息的 URL
-    # 访问令牌获取 URL，自定义的
+    # 访问令牌获取 URL， 查看TokenEndpoint
     access-token-uri: http://127.0.0.1:8080/oauth/token

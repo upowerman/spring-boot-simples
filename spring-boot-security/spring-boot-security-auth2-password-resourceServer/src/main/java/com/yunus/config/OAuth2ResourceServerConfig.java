@@ -24,8 +24,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
                 // 设置 /callback02 无需权限访问
                 .antMatchers("/callback02").permitAll()
                 // 设置其它请求，需要认证后访问
-                .anyRequest().authenticated()
-        ;
+                .anyRequest().authenticated();
     }
 
 }
