@@ -16,6 +16,8 @@
         <module>spring-boot-security-RBAC</module>
         <module>spring-boot-security-auth2-password-authServer</module>
         <module>spring-boot-security-auth2-password-resourceServer</module>
+        <module>spring-boot-security-auth2-code-authServer</module>
+        <module>spring-boot-security-auth2-code-resourceServer</module>
     </modules>
 
     <dependencies>
