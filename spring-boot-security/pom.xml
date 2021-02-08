@@ -18,6 +18,8 @@
         <module>spring-boot-security-auth2-password-resourceServer</module>
         <module>spring-boot-security-auth2-code-authServer</module>
         <module>spring-boot-security-auth2-code-resourceServer</module>
+        <module>spring-boot-security-auth2-implicit-authServer</module>
+        <module>spring-boot-security-auth2-implicit-resourceServer</module>
     </modules>
 
     <dependencies>
