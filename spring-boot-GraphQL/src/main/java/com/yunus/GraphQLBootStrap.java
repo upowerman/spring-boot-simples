@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2020/11/5 15:30
  */
 @SpringBootApplication
-public class GraphQlBootStrap {
+public class GraphQLBootStrap {
     public static void main(String[] args) {
-        SpringApplication.run(GraphQlBootStrap.class,args);
+        SpringApplication.run(GraphQLBootStrap.class,args);
     }
 }
