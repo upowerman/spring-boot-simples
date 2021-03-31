@@ -20,7 +20,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring-social-config.versino>1.1.6.RELEASE</spring-social-config.versino>
         <spring-contect-support.version>5.0.10.RELEASE</spring-contect-support.version>
-        <guava.version>27.0.1-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <fastjson.version>1.2.54</fastjson.version>
         <hutool.version>4.1.12</hutool.version>
         <druid.version>1.1.5</druid.version>
