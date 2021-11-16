@@ -1,4 +1,4 @@
-package com.yunus.domain;
+package com.yunus.pojo.domain;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

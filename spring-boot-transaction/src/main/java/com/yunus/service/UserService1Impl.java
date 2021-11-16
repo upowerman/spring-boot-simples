@@ -1,7 +1,7 @@
 package com.yunus.service;
 
 import com.yunus.dao.UserMapper;
-import com.yunus.domain.User;
+import com.yunus.pojo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

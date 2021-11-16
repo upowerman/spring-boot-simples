@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,5 +30,25 @@ public class FileController {
         System.out.println(image.getName());
         System.out.println("---------------");
         return Maps.newHashMap();
+    }
+
+
+    @PostMapping("/test")
+    public Map<String,String> file(MultipartFile name) throws IOException {
+        if (name == null){
+            throw new FileNotFoundException();
+        }
+        HashMap<String,String> result = new HashMap<>();
+        String fileName = name.getName();
+        String originalFilename = name.getOriginalFilename();
+        InputStream in = name.getInputStream();
+        File outFile = new File("/Users/gaoyunfeng/"+originalFilename);
+        OutputStream out = new FileOutputStream(outFile);
+        byte[] buffer = new byte[1024];
+        while (in.read(buffer)>0){
+            out.write(buffer);
+        }
+        result.put("code","success");
+        return result;
     }
 }

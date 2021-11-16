@@ -1,6 +1,6 @@
 package com.yunus.controller;
 
-import com.yunus.domain.User;
+import com.yunus.pojo.domain.User;
 import com.yunus.mapper.UserMapper;
 import com.yunus.service.UserService;
 import org.apache.ibatis.session.RowBounds;

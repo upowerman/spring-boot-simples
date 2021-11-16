@@ -1,6 +1,6 @@
 package com.yunus.mapper;
 
-import com.yunus.domain.User;
+import com.yunus.pojo.domain.User;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.apache.ibatis.session.RowBounds;

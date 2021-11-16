@@ -1,6 +1,6 @@
 package com.yunus.repository;
 
-import com.yunus.domain.User;
+import com.yunus.pojo.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

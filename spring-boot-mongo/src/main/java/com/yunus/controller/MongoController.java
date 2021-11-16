@@ -1,7 +1,7 @@
 package com.yunus.controller;
 
 
-import com.yunus.domain.User;
+import com.yunus.pojo.domain.User;
 import com.yunus.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

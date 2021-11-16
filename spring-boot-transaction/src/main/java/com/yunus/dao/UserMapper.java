@@ -1,7 +1,7 @@
 package com.yunus.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yunus.domain.User;
+import com.yunus.pojo.domain.User;
 
 /**
  * @Author: gaoyunfeng
