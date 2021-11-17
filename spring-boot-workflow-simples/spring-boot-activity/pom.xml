@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yunus</groupId>
-    <artifactId>spring-boot-activiti</artifactId>
+    <artifactId>spring-boot-activity</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -86,7 +86,7 @@
     </dependencies>
 
     <build>
-        <finalName>Spring-boot-activiti</finalName>
+        <finalName>Spring-boot-activity</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -9,14 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-activiti-simples</artifactId>
+    <artifactId>spring-boot-workflow-simples</artifactId>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-boot-activiti-helloworld</module>
-        <module>spring-boot-activiti-config</module>
-        <module>spring-boot-activiti</module>
+        <module>spring-boot-activity</module>
+        <module>spring-boot-camunda</module>
     </modules>
 
 

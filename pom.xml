@@ -54,12 +54,14 @@
         <module>spring-boot-mq-kafka</module>
         <module>spring-boot-mail</module>
         <module>spring-boot-sentinel</module>
-        <module>spring-boot-activiti-simples</module>
         <module>spring-boot-canal</module>
         <module>spring-boot-mybatis-master-slave</module>
-        <module>spring-security</module>
         <module>spring-boot-stateMachine</module>
         <module>spring-boot-mock</module>
+        <module>spring-boot-workflow-simples</module>
+        <module>spring-boot-job</module>
+        <module>spring-boot-mybatis-plus</module>
+        <module>spring-boot-GraphQL</module>
     </modules>
 
     <dependencyManagement>
