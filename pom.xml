@@ -29,7 +29,7 @@
         <fastjson.version>1.2.54</fastjson.version>
         <logstash-logback.version>5.3</logstash-logback.version>
         <activiti.version>6.0.0</activiti.version>
-        <h2.version>1.4.197</h2.version>
+        <h2.version>2.0.206</h2.version>
         <canal.version>1.1.0</canal.version>
     </properties>
 
