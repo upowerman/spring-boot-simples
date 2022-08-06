@@ -11,7 +11,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.yunus</groupId>
-    <artifactId>spring-boot-learning</artifactId>
+    <artifactId>spring-boot-simples</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
@@ -36,27 +36,22 @@
     <modules>
         <module>spring-boot-cache</module>
         <module>spring-boot-web</module>
-        <module>spring-boot-mq</module>
         <module>spring-boot-websocket</module>
         <module>spring-boot-security</module>
         <module>spring-boot-transaction</module>
-        <module>spring-boot-scheduled</module>
         <module>spring-boot-es</module>
         <module>spring-boot-webflux</module>
-        <module>spring-boot-starter-demo</module>
-        <module>spring-boot-starter-client</module>
         <module>spring-boot-mongo</module>
-        <module>spring-boot-mq-kafka</module>
         <module>spring-boot-mail</module>
         <module>spring-boot-sentinel</module>
         <module>spring-boot-canal</module>
-        <module>spring-boot-mybatis-master-slave</module>
         <module>spring-boot-stateMachine</module>
-        <module>spring-boot-mock</module>
         <module>spring-boot-workflow-simples</module>
         <module>spring-boot-job</module>
-        <module>spring-boot-mybatis-plus</module>
         <module>spring-boot-GraphQL</module>
+        <module>spring-boot-mq-simples</module>
+        <module>spring-boot-mybatis-simples</module>
+        <module>spring-boot-starter-simples</module>
     </modules>
 
     <dependencyManagement>

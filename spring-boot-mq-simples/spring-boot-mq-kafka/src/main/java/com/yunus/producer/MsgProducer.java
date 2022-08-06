@@ -1,7 +1,6 @@
 package com.yunus.producer;
 
 import com.yunus.msg.BaseMessage;
-import com.yunus.msg.OrderMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;

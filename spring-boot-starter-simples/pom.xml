@@ -9,14 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-workflow-simples</artifactId>
-
+    <artifactId>spring-boot-starter-simples</artifactId>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>spring-boot-activity</module>
-        <module>spring-boot-camunda</module>
-    </modules>
-
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
 </project>
