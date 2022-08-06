@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: spring-boot-logstash
-
-server:
-  port: 8080

@@ -36,16 +36,13 @@
     <modules>
         <module>spring-boot-cache</module>
         <module>spring-boot-web</module>
-        <module>spring-boot-data-jpa</module>
         <module>spring-boot-mq</module>
-        <module>spring-boot-docker</module>
         <module>spring-boot-websocket</module>
         <module>spring-boot-security</module>
         <module>spring-boot-transaction</module>
         <module>spring-boot-scheduled</module>
         <module>spring-boot-es</module>
         <module>spring-boot-webflux</module>
-        <module>spring-boot-elk</module>
         <module>spring-boot-starter-demo</module>
         <module>spring-boot-starter-client</module>
         <module>spring-boot-mongo</module>
