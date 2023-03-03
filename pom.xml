@@ -52,6 +52,7 @@
         <module>spring-boot-mq-simples</module>
         <module>spring-boot-mybatis-simples</module>
         <module>spring-boot-starter-simples</module>
+        <module>spring-boot-gis</module>
     </modules>
 
     <dependencyManagement>
