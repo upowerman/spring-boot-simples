@@ -1,7 +1,9 @@
 package com.head.demo1;
 
+import org.geotools.data.DataUtilities;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
+import org.geotools.data.collection.SpatialIndexFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.map.FeatureLayer;
 import org.geotools.map.Layer;
@@ -27,13 +29,17 @@ public class Quickstart {
 
         FileDataStore store = FileDataStoreFinder.getDataStore(file);
         SimpleFeatureSource featureSource = store.getFeatureSource();
+        SimpleFeatureSource cachedSource =
+                DataUtilities.source(
+                        new SpatialIndexFeatureCollection(featureSource.getFeatures()));
 
         // Create a map content and add our shapefile to it
         MapContent map = new MapContent();
-        map.setTitle("Quickstart");
-
+//        map.setTitle("Quickstart");
+        map.setTitle("Using cached features");
         Style style = SLD.createSimpleStyle(featureSource.getSchema());
-        Layer layer = new FeatureLayer(featureSource, style);
+//        Layer layer = new FeatureLayer(featureSource, style);
+        Layer layer = new FeatureLayer(cachedSource, style);
         map.addLayer(layer);
 
         // Now display the map

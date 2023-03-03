@@ -14,6 +14,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <geotools.version>28-RC</geotools.version>
+        <gt.geojsondatastore.version>26.4</gt.geojsondatastore.version>
     </properties>
 
     <dependencies>
@@ -32,6 +33,16 @@
             <groupId>org.geotools</groupId>
             <artifactId>gt-swing</artifactId>
             <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geojsondatastore</artifactId>
+            <version>${gt.geojsondatastore.version}</version>
         </dependency>
     </dependencies>
 
